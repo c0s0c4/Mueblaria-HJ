@@ -1,0 +1,25 @@
+h1{
+    color: #A0522D;
+}
+h2{
+    color: #A0522D;
+}
+h3{
+    color: #A0522D;
+}
+p{
+    color: #C47A6D;
+}
+footer img{
+    width: 2vw;
+    color: #A0522D;
+}
+header img{
+    width: 5vw;
+}
+header h1{
+    width: fit-content;
+}
+*{
+    background-color: #F5E6D3;
+}
