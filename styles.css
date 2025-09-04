@@ -171,7 +171,7 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
 
 #listadeproductos {
     position: absolute;
-    top: 100%;        /* justo debajo del input */
+    top: 60%;        /* justo debajo del input */
     left: 0;
     width: 100%;      /* mismo ancho que el input */
     max-height: 150px;
