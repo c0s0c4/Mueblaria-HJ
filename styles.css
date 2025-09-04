@@ -169,7 +169,7 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
 
    #listadeproductos {
     position: absolute;
-    width: calc(100% - 30px); /* menos padding */
+    width: 170px;
     max-height: 150px;
     overflow-y: auto;
     background: white;
@@ -179,10 +179,6 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
     display: none;
     margin-top: 2px;
     border-radius: 5px;
-}
-
-#listadeproductos {
-    width: 170px; /* mismo que el input */
 }
 
 
