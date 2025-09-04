@@ -60,6 +60,7 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
 }
 
 
+
 .input {
     width: 170px;
     height: 100%;
@@ -169,20 +170,20 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
 
 
 
- 
-#listadeproductos {
+   #listadeproductos {
     position: absolute;
-    top: 100%; /* baja justo debajo del input */
-    left: 0;   /* alineado a la izquierda del contenedor */
-    width: 100%; /* mismo ancho que el input */
+    width: 170px;
     max-height: 150px;
     overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    display: none; /* oculto al inicio */
+    border-top: none;
     z-index: 10;
+    display: none;
+    margin-top: 2px;
+    border-radius: 5px;
 }
+
 
   #listadeproductos li {
     padding: 8px;
