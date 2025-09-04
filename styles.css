@@ -159,4 +159,10 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
     }
 }
 
+
+  ul {
+      list-style: none;
+      padding: 0;
+    }
+
 /* Mile ----- productos.html------------------------------------------------------------------------------------------------------------- */
