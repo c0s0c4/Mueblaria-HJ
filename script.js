@@ -1,4 +1,4 @@
-<script>
+
   const input = document.getElementById("input");
   const lista = document.getElementById("listadeproductos");
   const items = lista.getElementsByTagName("li");
@@ -20,4 +20,4 @@
     // Solo mostrar la lista si hay coincidencias y el input no está vacío
     lista.style.display = tieneCoincidencias ? "block" : "none";
   });
-</script>
+
