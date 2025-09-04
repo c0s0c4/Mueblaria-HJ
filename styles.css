@@ -181,6 +181,10 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
     border-radius: 5px;
 }
 
+#listadeproductos {
+    width: 170px; /* mismo que el input */
+}
+
 
   #listadeproductos li {
     padding: 8px;
