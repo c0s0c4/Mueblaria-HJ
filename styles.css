@@ -56,11 +56,9 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
     cursor: pointer;
     padding-left: 15px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+    position: relative;
 }
 
-.InputContainer {
-    position: relative; /* necesario para que el ul se posicione respecto a este contenedor */
-}
 
 .input {
     width: 170px;
