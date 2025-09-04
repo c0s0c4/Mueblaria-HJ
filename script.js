@@ -1,7 +1,7 @@
 
 
 
-
+// lista del buscador
 const input = document.getElementById("input");
 const lista = document.getElementById("listadeproductos");
 const items = lista.getElementsByTagName("li");
@@ -22,3 +22,4 @@ input.addEventListener("input", function() {
 
     lista.style.display = tieneCoincidencias ? "block" : "none";
 });
+// lista del buscador
