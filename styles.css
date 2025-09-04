@@ -173,8 +173,8 @@ relative; overflow: hidden;transition: all 0.3s; border-radius: 13px; background
     position: absolute;
     top: 60%;        /* justo debajo del input */
     left: 0;
-    width: 100%;      /* mismo ancho que el input */
-    max-height: 150px;
+    width: 60%;      /* mismo ancho que el input */
+    max-height: 100px;
     overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
