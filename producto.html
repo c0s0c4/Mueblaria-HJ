@@ -6,118 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Producto</title>
 
-    <style>
-        body {
-            background-color: #ebd1a5;
-            color: #A0522D;
-            font-family: 'Playfair Display', serif;
-            margin: 0;
-            padding: 0px;
-        }
-
-        header {
-            padding: 20px;
-        }
-
-        /* Layout principal */
-        .producto-details {
-            display: flex;
-            align-items: flex-start;
-            gap: 40px;
-            margin: 40px;
-        }
-
-        /* Columna izquierda (imagen) */
-        .columna-izquierda img {
-            max-width: 450px;
-            margin-left: 0;
-        }
-
-        /* Columna derecha (tabla + descripción) */
-        .columna-derecha {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Título */
-        .columna-derecha h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #A0522D;
-        }
-
-        /* TABLA */
-        table {
-            border-collapse: separate;
-            border-spacing: 10px;
-            background-color: #ebd1a5;
-            padding: 10px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        th,
-        td {
-            padding: 20px 12px;
-        }
-
-        th {
-            background-color: #A0522D;
-            color: white;
-            text-align: left;
-            border-radius: 6px;
-        }
-
-        td {
-            background-color: #edeae6;
-            color: black;
-            border-radius: 6px;
-        }
-
-        /* Descripción */
-        .descripcion {
-            font-size: 16px;
-            line-height: 1.5;
-            margin: 20px 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Precio */
-        .precio {
-            font-size: 24px;
-            color: #355e3b;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* Botón */
-        button {
-            background-color: #65854a;
-            color: white;
-            padding: 14px 28px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-family: 'Inter', sans-serif;
-        }
-
-        button:hover {
-            background-color: #26472a;
-        }
-    </style>
 </head>
 
 <body>
 
     <header>
-        <h2>Hermanos Jota</h2>
-        <div class="carrito">Carrito: <span id="contadorCarrito">0</span></div>
+        <div class="container">
+            <div class="btn-menu">
+                <label for="btn-menu" class="icon-menu">☰</label>
+            </div>
+            <div class="logo">
+                <img src="img/logo.svg" alt="logo">
+            </div>
+            <nav class="menu">
+                <a href="nosotros.html">Nosotros</a>
+                <a href="productos.html">Productos</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <div class="carrito">Carrito: <span id="contadorCarrito">0</span></div>
+        </div>
     </header>
+
+    <input type="checkbox" id="btn-menu" />
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav class="menu">
+                <a href="nosotros.html">Nosotros</a>
+                <a href="productos.html">Productos</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+            <label for="btn-menu" class="icon-equis">✖️</label>
+        </div>
+    </div>
+
+
 
     <div class="producto-details">
         <!-- Columna izquierda -->
@@ -650,3 +572,238 @@
 </body>
 
 </html>
+
+  <style>
+        /* Reset y tipografías */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            background-color: #ebd1a5;
+            color: #A0522D;
+            font-family: 'Playfair Display', serif;
+            padding-top: 80px; /* para dejar espacio al header fijo */
+        }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            height: 70px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #F5E6D3;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo img {
+            width: 7vh;
+        }
+
+        .menu a {
+            display: inline-block;
+            padding: 15px 10px;
+            color: #A0522D;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+.info-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* separación vertical */
+    align-items: flex-start;
+}
+
+
+        .menu a:hover {
+            border-bottom: 2px solid #87A96B;
+            padding: 5px 10px;
+        }
+
+        /* Botón menú móvil */
+        .btn-menu label {
+            color: #D4A437;
+            font-size: 5vh;
+            cursor: pointer;
+        }
+
+        /* Menú lateral */
+        #btn-menu {
+            display: none;
+        }
+
+        .container-menu {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 500ms ease;
+            z-index: 1100;
+        }
+
+        #btn-menu:checked~.container-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cont-menu {
+            width: 250px;
+            height: 100%;
+            background: #F5E6D3;
+            transform: translateX(-100%);
+            transition: all 500ms ease;
+            padding-top: 40px;
+        }
+
+        #btn-menu:checked~.container-menu .cont-menu {
+            transform: translateX(0);
+        }
+
+        .cont-menu nav {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cont-menu nav a {
+            padding: 20px;
+            color: #A0522D;
+            border-left: 5px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .cont-menu nav a:hover {
+            border-left: 5px solid #87A96B;
+            background: #E6D8C5;
+            color: #C47A6D;
+        }
+
+        .cont-menu label {
+            position: absolute;
+            right: 1px;
+            top: 10px;
+            cursor: pointer;
+            color: #A0522D;
+        }
+
+        /* PRODUCTOS */
+        .producto-details {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin: 40px;
+            flex-wrap: wrap;
+        }
+
+        .columna-izquierda img {
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .columna-derecha {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .columna-derecha h2 {
+            font-size: 32px;
+            color: #A0522D;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 10px;
+            background-color: #ebd1a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        th,
+        td {
+            padding: 20px 12px;
+        }
+
+        th {
+            background-color: #A0522D;
+            color: white;
+            text-align: left;
+            border-radius: 6px;
+        }
+
+        td {
+            background-color: #edeae6;
+            color: black;
+            border-radius: 6px;
+        }
+
+        .descripcion {
+            font-size: 16px;
+            line-height: 1.5;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .precio {
+            font-size: 24px;
+            color: #355e3b;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #65854a;
+            color: white;
+            padding: 14px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button:hover {
+            background-color: #26472a;
+        }
+
+        /* Carrito */
+        .carrito {
+            color: #A0522D;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .producto-details {
+                flex-direction: column;
+            }
+
+            .btn-menu label {
+                display: block;
+            }
+
+            .menu {
+                display: block;
+            }
+        }
+    </style>
