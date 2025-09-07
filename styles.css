@@ -222,7 +222,6 @@ ul {
     position: absolute;
     top: 10%;
     /* justo debajo del input */
-    left: 7;
     width: 13%;
     /* mismo ancho que el input */
     max-height: 100px;

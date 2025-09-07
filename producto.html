@@ -1,11 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detalle de Producto</title>
+
+    <style>
+        body {
+            background-color: #ebd1a5;
+            color: #A0522D;
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0px;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        /* Layout principal */
+        .producto-details {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin: 40px;
+        }
+
+        /* Columna izquierda (imagen) */
+        .columna-izquierda img {
+            max-width: 450px;
+            margin-left: 0;
+        }
+
+        /* Columna derecha (tabla + descripción) */
+        .columna-derecha {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Título */
+        .columna-derecha h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #A0522D;
+        }
+
+        /* TABLA */
+        table {
+            border-collapse: separate;
+            border-spacing: 10px;
+            background-color: #ebd1a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        th,
+        td {
+            padding: 20px 12px;
+        }
+
+        th {
+            background-color: #A0522D;
+            color: white;
+            text-align: left;
+            border-radius: 6px;
+        }
+
+        td {
+            background-color: #edeae6;
+            color: black;
+            border-radius: 6px;
+        }
+
+        /* Descripción */
+        .descripcion {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Precio */
+        .precio {
+            font-size: 24px;
+            color: #355e3b;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Botón */
+        button {
+            background-color: #65854a;
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button:hover {
+            background-color: #26472a;
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <header>
+        <h2>Hermanos Jota</h2>
+        <div class="carrito">Carrito: <span id="contadorCarrito">0</span></div>
+    </header>
+
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Silla de Trabajo Belgrano.png" alt="Silla de Trabajo Belgrano">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Silla de Trabajo Belgrano</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>60 × 60 × 90-100 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Malla técnica, tejido reciclado</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Base cromada, tapizado premium</td>
+                </tr>
+                <tr>
+                    <th>Regulación</th>
+                    <td>Altura + inclinación respaldo</td>
+                </tr>
+                <tr>
+                    <th>Certificación</th>
+                    <td>Ergonomía europea EN 1335</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Silla ergonómica regulable en altura con respaldo de malla transpirable y asiento tapizado en tejido reciclado. Diseñada para largas jornadas de trabajo con máximo confort y apoyo lumbar, ideal para oficinas en casa y espacios de coworking.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+<div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Escritorio Costa.png" alt="Escritorio Costa">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Escritorio Costa</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>120 × 60 × 75 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Bambú laminado, herrajes ocultos</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Laca mate resistente</td>
+                </tr>
+                <tr>
+                    <th>Almacenamiento</th>
+                    <td>1 cajón con organizador</td>
+                </tr>
+                <tr>
+                    <th>Cables</th>
+                    <td>Pasacables integrado</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Escritorio compacto con cajón organizado y tapa pasacables integrada en bambú laminado. Ideal para espacios de trabajo en casa, combina funcionalidad moderna con estética minimalista y sostenible, perfecto para el trabajo remoto.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Sillas Córdoba.png" alt="Sillas Córdoba">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Sillas Córdoba</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>45 × 52 × 80 cm (cada una)</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Contrachapado nogal, tubo de acero</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Laca mate, pintura epoxi</td>
+                </tr>
+                <tr>
+                    <th>Almacenamiento</th>
+                    <td>1 cajón con organizador</td>
+                </tr>
+                <tr>
+                    <th>Apilables</th>
+                    <td>Hasta 6 sillas</td>
+                </tr>
+                <tr>
+                    <th>Incluye</th>
+                    <td>Set de 4 sillas</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Set de cuatro sillas apilables en contrachapado moldeado de nogal y estructura tubular pintada en Sage Green. Su diseño ergonómico y materiales de calidad garantizan comodidad y durabilidad en el uso diario, perfectas para comedores contemporáneos.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+     <div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Mesa Comedor Pampa.png" alt="Mesa Comedor Pampa">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Mesa Comedor Pampa</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>160-240 × 90 × 75 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Roble macizo FSC®, mecanismo alemán</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Aceite-cera natural</td>
+                </tr>
+                <tr>
+                    <th>Capacidad</th>
+                    <td>6-10 comensales</td>
+                </tr>
+                <tr>
+                    <th>Extensión</th>
+                    <td>Sistema de mariposa central</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Mesa extensible de roble macizo con tablero biselado y sistema de apertura suave. Su diseño robusto y elegante se adapta perfectamente a reuniones íntimas o grandes celebraciones familiares, extendiéndose de 6 a 10 comensales.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      <div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Sofá Patagonia.png" alt="Sofá Patagonia">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Sofá Patagonia</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>160-240 × 90 × 75 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Madera de eucalipto certificada FSC®</td>
+                </tr>
+                <tr>
+                    <th>Tapizado</th>
+                    <td>Lino 100% natural premium</td>
+                </tr>
+                <tr>
+                    <th>Relleno</th>
+                    <td>Espuma HR + plumón reciclado</td>
+                </tr>
+                <tr>
+                    <th>Sostenibilidad</th>
+                    <td>Materiales 100% reciclables</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Sofá de tres cuerpos tapizado en lino Warm Alabaster con patas cónicas de madera. Los cojines combinan espuma de alta resiliencia con plumón reciclado, ofreciendo comodidad duradera y sostenible para el hogar moderno.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/efdc5bb9-d292-46ff-b9e9-753141706158.png" alt="Cama Neuquén">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Cama Neuquén</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>160 × 200 × 90 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Roble macizo FSC®, tapizado lino</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Aceite natural, tapizado premium</td>
+                </tr>
+                <tr>
+                    <th>Colchón</th>
+                    <td>Compatible con colchón 160×200</td>
+                </tr>
+                <tr>
+                    <th>Características</th>
+                    <td>Cabecero flotante acolchado</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Cama plataforma con cabecero flotante tapizado en lino natural y estructura de madera maciza. Su diseño minimalista y sofisticado crea un ambiente de serenidad y elegancia, perfecto para dormitorios contemporáneos que buscan paz y simplicidad.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+       <div class="producto">
+    <div class="producto-details">
+        <!-- Columna izquierda -->
+        <div class="columna-izquierda">
+            <img src="img/Mesa de Noche Aconcagua.png" alt="Mesa de Noche Aconcagua">
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="columna-derecha">
+            <h2>Mesa de Noche Aconcagua</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>45 × 35 × 60 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Roble macizo FSC®, herrajes soft-close</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Barniz mate de poliuretano</td>
+                </tr>
+                <tr>
+                    <th>Almacenamiento</th>
+                    <td>1 cajón + repisa inferior</td>
+                </tr>
+                <tr>
+                    <th>Características</th>
+                    <td>Cajón con cierre suave</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Mesa de noche con cajón oculto y repisa inferior en roble certificado FSC®. Su diseño limpio y funcional permite convivir con diferentes estilos de dormitorio, ofreciendo almacenamiento discreto y elegante para objetos personales.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <div class="columna-izquierda">
+            <img src="img/Mesa de Centro Araucaria.png" alt="Mesa de Centro Araucaria">
+        </div>
+        <div class="columna-derecha">
+            <h2>Mesa de Centro Araucaria</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>90 × 90 × 45 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Sobre de mármol Patagonia, patas de nogal</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Mármol pulido, aceite natural en madera</td>
+                </tr>
+                <tr>
+                    <th>Peso</th>
+                    <td>42 kg</td>
+                </tr>
+                <tr>
+                    <th>Carga máxima</th>
+                    <td>25 kg distribuidos</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Mesa de centro con sobre circular de mármol Patagonia y base de tres patas en madera de nogal. Su diseño minimalista se convierte en el punto focal perfecto para cualquier sala de estar contemporánea, combinando la frialdad del mármol con la calidez de la madera.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <div class="columna-izquierda">
+            <img src="img/Sillón Copacabana.png" alt="Sillón Copacabana">
+        </div>
+        <div class="columna-derecha">
+            <h2>Sillón Copacabana</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>90 × 85 × 95 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Cuero curtido vegetal, acero pintado</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Cuero anilina premium</td>
+                </tr>
+                <tr>
+                    <th>Rotación</th>
+                    <td>360° silenciosa y suave</td>
+                </tr>
+                <tr>
+                    <th>Garantía</th>
+                    <td>10 años en estructura</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Sillón lounge en cuero cognac con base giratoria en acero Burnt Sienna. Inspirado en la estética brasilera moderna de los 60, combina comodidad excepcional con un diseño icónico que trasciende tendencias y épocas.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <div class="columna-izquierda">
+            <img src="img/Butaca Mendoza.png" alt="Butaca Mendoza">
+        </div>
+        <div class="columna-derecha">
+            <h2>Butaca Mendoza</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>80 × 75 × 85 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Guatambú macizo, tela bouclé</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Cera vegetal, tapizado premium</td>
+                </tr>
+                <tr>
+                    <th>Tapizado</th>
+                    <td>Repelente al agua y manchas</td>
+                </tr>
+                <tr>
+                    <th>Confort</th>
+                    <td>Espuma alta densidad</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Butaca tapizada en bouclé Dusty Rose con base de madera de guatambú. El respaldo curvo abraza el cuerpo y ofrece máximo confort, mientras que su diseño orgánico aporta calidez y sofisticación a cualquier ambiente contemporáneo.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <div class="columna-izquierda">
+            <img src="img/Biblioteca Recoleta.png" alt="Biblioteca Recoleta">
+        </div>
+        <div class="columna-derecha">
+            <h2>Biblioteca Recoleta</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>100 × 35 × 200 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Estructura de acero, estantes de roble</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Laca mate ecológica</td>
+                </tr>
+                <tr>
+                    <th>Capacidad</th>
+                    <td>45 kg por estante</td>
+                </tr>
+                <tr>
+                    <th>Modulares</th>
+                    <td>5 estantes ajustables</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Sistema modular de estantes abierto que combina estructura de acero Sage Green y repisas en roble claro. Perfecta para colecciones y objetos de diseño, su diseño versátil se adapta a cualquier espacio contemporáneo con elegancia funcional.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="producto">
+    <div class="producto-details">
+        <div class="columna-izquierda">
+            <img src="img/Aparador Uspallata.png" alt="Aparador Uspallata">
+        </div>
+        <div class="columna-derecha">
+            <h2>Aparador Uspallata</h2>
+
+            <table>
+                <tr>
+                    <th>Medidas</th>
+                    <td>180 × 45 × 75 cm</td>
+                </tr>
+                <tr>
+                    <th>Materiales</th>
+                    <td>Nogal macizo FSC®, herrajes de latón</td>
+                </tr>
+                <tr>
+                    <th>Acabado</th>
+                    <td>Aceite natural ecológico</td>
+                </tr>
+                <tr>
+                    <th>Peso</th>
+                    <td>68 kg</td>
+                </tr>
+                <tr>
+                    <th>Capacidad</th>
+                    <td>6 compartimentos interiores</td>
+                </tr>
+            </table>
+
+            <div class="info-extra">
+                <p class="descripcion">
+                    Aparador de seis puertas fabricado en nogal sostenible con tiradores metálicos en acabado latón. Su silueta minimalista realza el veteado natural de la madera, creando una pieza que combina funcionalidad y elegancia atemporal para espacios contemporáneos.
+                </p>
+                <p class="precio">Precio: $000</p>
+                <button class="btnAgregarCarrito">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="app.js"></script>
 </body>
+
 </html>
