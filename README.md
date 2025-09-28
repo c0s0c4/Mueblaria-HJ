@@ -93,6 +93,7 @@ Mueblaria-HJ/
 Proyecto realizado por el equipo **Hermanos Jota**:
 - Integrante 1 Constanza Calicchio
 - Integrante 2 Milena Casarrubia
+- Integrante 3 Mariano Céspedes
 
 
 ---
