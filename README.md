@@ -1,11 +1,11 @@
 # Mueblaria-HJ
 Proyecto curso full stack ITBA
-# 🪑 Mueblería HJ
+#  Mueblería HJ
 Proyecto académico – Curso Full Stack ITBA
 
 ---
 
-## 📌 Resumen del proyecto
+##  Resumen del proyecto
 El presente proyecto corresponde al desarrollo de un sitio web de **e-commerce para Mueblería Hermanos Jota (HJ)**, realizado en el marco del curso **Full Stack Developer – ITBA**.
 El objetivo es construir una plataforma online que permita a los clientes visualizar productos de mobiliario, acceder a sus detalles, conocer a la empresa y establecer contacto.
 
@@ -13,7 +13,7 @@ El proyecto se divide en diferentes sprints que abarcan desde la maquetación in
 
 ---
 
-## 🎯 Objetivos
+##  Objetivos
 1. Construir un sitio web responsive y funcional para una mueblería.
 2. Implementar navegación clara entre las secciones principales (Inicio, Productos, Detalle, Nosotros, Contacto).
 3. Simular la experiencia de un carrito de compras.
@@ -22,7 +22,7 @@ El proyecto se divide en diferentes sprints que abarcan desde la maquetación in
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 - **Frontend**
   - HTML5
   - CSS3
@@ -34,7 +34,7 @@ El proyecto se divide en diferentes sprints que abarcan desde la maquetación in
 
 ---
 
-## 📂 Estructura del proyecto
+##  Estructura del proyecto
 
 Mueblaria-HJ/
 │── index.html # Página principal
@@ -63,7 +63,7 @@ Mueblaria-HJ/
 
 ---
 
-## 📑 Funcionalidades desarrolladas
+##  Funcionalidades desarrolladas
 
 - **Página principal (Home):** muestra introducción e identidad de la mueblería.
 - **Productos:** catálogo con variedad de muebles y sus características.
@@ -74,21 +74,21 @@ Mueblaria-HJ/
 
 ---
 
-## 📅 Estado de avance por sprints
+##  Estado de avance por sprints
 
-- **Sprint 1 ✅:**
+- **Sprint 1 :**
   - Maquetación en HTML
   - Estilos base en CSS
   - Creación de estructura de navegación
 
-- **Sprint 2 🔄:**
+- **Sprint 2 :**
   - Interacción con JavaScript
   - Carrito de compras (simulación)
   - Dinamismo en productos
 
 ---
 
-## 👨‍💻 Equipo de trabajo
+##  Equipo de trabajo
 
 Proyecto realizado por el equipo **Hermanos Jota**:
 - Integrante 1 Constanza Calicchio
@@ -98,5 +98,5 @@ Proyecto realizado por el equipo **Hermanos Jota**:
 
 ---
 
-## 📖 Licencia
+##  Licencia
 Este proyecto fue desarrollado con fines **educativos y académicos** en el marco del curso **Full Stack – ITBA**.
