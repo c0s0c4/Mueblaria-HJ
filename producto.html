@@ -121,40 +121,6 @@
 </body>
 </html>
 
-
-        <script>
-            const botonesAgregar = document.querySelectorAll('.btnAgregarCarrito');
-            const contadorCarrito = document.getElementById('contadorCarrito');
-            let cantidadCarrito = 0;
-
-            botonesAgregar.forEach(boton => {
-                boton.addEventListener('click', (e) => {
-                    cantidadCarrito++;
-                    contadorCarrito.textContent = cantidadCarrito;
-
-                    // Crear notificación
-                    const notificacion = document.createElement('div');
-                    notificacion.classList.add('notificacion-carrito');
-
-                    // Obtenemos el nombre del producto desde el h2
-                    const nombreProducto = e.target.closest('.producto-details').querySelector('h2').textContent;
-                    notificacion.textContent = `Agregaste "${nombreProducto}" al carrito`;
-
-                    document.body.appendChild(notificacion);
-
-                    // Mostrar notificación
-                    setTimeout(() => notificacion.classList.add('visible'), 10);
-
-                    // Ocultar y eliminar después de 2 segundos
-                    setTimeout(() => {
-                        notificacion.classList.remove('visible');
-                        setTimeout(() => notificacion.remove(), 300);
-                    }, 2000);
-                });
-            });
-        </script>
-
-
     </body>
 
 </html>
