@@ -9,7 +9,7 @@ const productos = {
     acabado: "Aceite natural ecológico",
     peso: "68 kg",
     capacidad: "6 compartimentos interiores"
-  },
+  },  
   "butaca-mendoza": {
     nombre: "Butaca Mendoza",
     precio: "$000",

@@ -5,7 +5,7 @@ const contenedor = document.getElementById("productos-container");
 Object.keys(productos).forEach(id => {
     const p = productos[id]; // Obtiene los datos del producto
 
-    const card = document.createElement("div");
+    const card = document.createElement("div"); 
     card.classList.add("card");
 
     // Usa el ID como data-id

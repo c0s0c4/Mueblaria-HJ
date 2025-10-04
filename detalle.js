@@ -55,11 +55,11 @@ for (let key in data) {
   }
 }
 
-// 🚀 Obtener el ID de la URL
+
 const params = new URLSearchParams(window.location.search);
 const productoID = params.get("id");
 
-// Mostrar el producto correcto
+
 if (productoID && productos[productoID]) {
   mostrarDetallesProducto(productos[productoID]);
 } else {
