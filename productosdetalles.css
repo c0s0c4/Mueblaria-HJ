@@ -323,7 +323,7 @@
   box-shadow: #0b0b0b;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .cart {
