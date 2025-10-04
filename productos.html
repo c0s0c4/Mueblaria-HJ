@@ -47,20 +47,22 @@
                 <div class="InputContainer">
                     <input placeholder="Search" id="input" class="input" name="text" type="text">
                 </div>
-                <ul id="listadeproductos" class="lista-productos" style="display: none;">
-                    <li>Aparador Uspallata</li>
-                    <li>Butaca Mendoza</li>
-                    <li>Biblioteca Recoleta</li>
-                    <li>Mesa de Centro Araucaria</li>
-                    <li>Sillón Copacabana</li>
-                    <li>Mesa de Noche Aconcagua</li>
-                    <li>Sofá Patagonia</li>
-                    <li>Cama Neuquén</li>
-                    <li>Escritorio Costa</li>
-                    <li>Sillas Córdoba</li>
-                    <li>Silla de Trabajo Belgrano</li>
-                </ul>
+<ul id="listadeproductos" class="lista-productos" style="display: none;">
+    <li data-id="aparador-uspallata">Aparador Uspallata</li>
+    <li data-id="butaca-mendoza">Butaca Mendoza</li>
+    <li data-id="biblioteca-recoleta">Biblioteca Recoleta</li>
+    <li data-id="mesa-centro-araucaria">Mesa de Centro Araucaria</li>
+    <li data-id="sillon-copacabana">Sillón Copacabana</li>
+    <li data-id="mesa-noche-aconcagua">Mesa de Noche Aconcagua</li>
+    <li data-id="sofa-patagonia">Sofá Patagonia</li>
+    <li data-id="cama-neuquen">Cama Neuquén</li>
+    <li data-id="escritorio-costa">Escritorio Costa</li>
+    <li data-id="sillas-cordoba">Sillas Córdoba</li>
+    <li data-id="silla-trabajo-belgrano">Silla de Trabajo Belgrano</li>
+</ul>
+
             </div>
+
             <label class="labelforsearch" for="input">
                 <svg class="searchIcon" viewBox="0 0 512 512">
                     <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path>
@@ -96,6 +98,8 @@
                 window.location.href = `detalle.html?producto=${id}`;
             });
         });
+
+
     </script>
         <script src="app.js"></script>
 

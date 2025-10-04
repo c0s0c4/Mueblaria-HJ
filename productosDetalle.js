@@ -133,3 +133,4 @@ const productos = {
     certificacion: "Ergonomía europea EN 1335"
   }
 }
+

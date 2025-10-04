@@ -22,6 +22,40 @@ if (input) {
     });
 }
 
+window.onload = function() {
+    const input = document.getElementById("input");
+    const lista = document.getElementById("listadeproductos");
+    const items = lista ? lista.getElementsByTagName("li") : [];
+
+    // Filtrado en vivo del buscador
+    if (input) {
+        input.addEventListener("input", function() {
+            const filtro = input.value.toLowerCase();
+            let tieneCoincidencias = false;
+
+            for (let i = 0; i < items.length; i++) {
+                const texto = items[i].textContent.toLowerCase();
+                if (texto.includes(filtro) && filtro !== "") {
+                    items[i].style.display = "block";
+                    tieneCoincidencias = true;
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+
+            lista.style.display = tieneCoincidencias ? "block" : "none";
+        });
+    }
+
+    // 👇 Click en cada resultado → redirige al detalle con el ID
+    for (let i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", function() {
+            const id = this.getAttribute("data-id");
+            window.location.href = `detalle.html?producto=${id}`;
+        });
+    }
+}
+
 // array de productos con ID
 const productos = {
   "aparador-uspallata": {
