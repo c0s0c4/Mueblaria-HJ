@@ -70,6 +70,33 @@
 
         <div id="productos-container" class="productos"></div>
         <script src="productos.js"></script>
+            <script>
+        const contenedor = document.getElementById("productos-container");
+
+        Object.keys(productos).forEach(id => {
+            const p = productos[id];
+
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `
+                <img src="${p.imagen}" alt="${p.nombre}" width="200">
+                <div class="card-content">
+                    <h2>${p.nombre}</h2>
+                    <p class="precio">${p.precio}</p>
+                    <button class="btn btnDetalle" data-id="${id}">Detalle de producto</button>
+                </div>
+            `;
+            contenedor.appendChild(card);
+        });
+
+        // Conectar el botón al detalle con ID en la URL
+        document.querySelectorAll(".btnDetalle").forEach(boton => {
+            boton.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                window.location.href = `detalle.html?producto=${id}`;
+            });
+        });
+    </script>
         <script src="app.js"></script>
 
     </body>
