@@ -134,3 +134,42 @@ const productos = {
   }
 }
 
+// Obtenemos el producto de la URL
+const params = new URLSearchParams(window.location.search);
+const productoKey = params.get("producto");
+
+// Referencia al contenedor
+const contenedor = document.getElementById("producto-details");
+const p = productos[productoKey];
+
+if (p) {
+  // Generar tabla dinámicamente solo con las propiedades que existen
+  let tabla = "<table>";
+  const keysOrden = ["medidas","materiales","acabado","peso","capacidad","tapizado","confort"];
+
+  keysOrden.forEach(key => {
+    if (p[key]) {
+      let th = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g," $1");
+      tabla += `<tr><th>${th}</th><td>${p[key]}</td></tr>`;
+    }
+  });
+  tabla += "</table>";
+
+  contenedor.innerHTML = `
+    <div class="columna-izquierda">
+      <img src="${p.imagen}" alt="${p.nombre}">
+    </div>
+    <div class="columna-derecha">
+      <h2>${p.nombre}</h2>
+      <p class="precio">${p.precio}</p>
+      <p class="descripcion">${p.descripcion}</p>
+      ${tabla}
+      <a href="productos.html">← Volver al catálogo</a>
+    </div>
+  `;
+} else {
+  contenedor.innerHTML = `
+    <p>Producto no encontrado.</p>
+    <a href="productos.html">← Volver al catálogo</a>
+  `;
+}

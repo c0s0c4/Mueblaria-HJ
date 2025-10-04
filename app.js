@@ -1,31 +1,35 @@
+// app.js (donde generas las tarjetas)
 const contenedor = document.getElementById("productos-container");
 
-productos.forEach(p => {
-    const card = document.createElement("div")
-    card.classList.add("card")
+// Itera sobre las CLAVES del objeto 'productos' para obtener el ID
+Object.keys(productos).forEach(id => {
+    const p = productos[id]; // Obtiene los datos del producto
 
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    // Usa el ID como data-id
     card.innerHTML = `
-    <img src="${p.imagen}" alt="${p.nombre}" width="200">
-    <div class="card-content">
-      <h2 class="nombreproductocard">${p.nombre}</h2>
-      <button class="btn btnDetalle" data-id="${p.id}">Detalle de producto</button>
-      <p class="precio">${p.precio}</p>
-    </div>
-  `
-    contenedor.appendChild(card)
-})
+      <img src="${p.imagen}" alt="${p.nombre}" width="200">
+      <div class="card-content">
+        <h2>${p.nombre}</h2>
+        <p class="precio">${p.precio}</p>
+        <button class="btn btnDetalle" data-id="${id}">Detalle de producto</button>
+      </div>
+    `;
+    contenedor.appendChild(card);
+});
 
-// redirección al detalle
+// 🚀 Conectar el botón al detalle con ID en la URL
 document.querySelectorAll(".btnDetalle").forEach(boton => {
     boton.addEventListener("click", function() {
-        const id = this.getAttribute("data-id")
-        window.location.href = `producto.html?id=${id}`
-    })
-})
+        const id = this.getAttribute("data-id");
+        window.location.href = `producto.html?id=${id}`;
+    });
+});
 
-
-
-// contacto
+// -----------------------------
+// CONTACTO (esto no lo toco)
 const inputs = document.querySelectorAll(".input");
 
 function focusFunc() {
@@ -35,7 +39,7 @@ function focusFunc() {
 
 function blurFunc() {
   let parent = this.parentNode;
-  if (this.value == "") {
+  if (this.value === "") {
     parent.classList.remove("focus");
   }
 }
