@@ -41,7 +41,6 @@ app.get('/', (req, res) => {
       productos: '/api/productos',
       productoDetalle: '/api/productos/:id'
     },
-    documentacion: 'https://github.com/hermanosjota/api-docs'
   });
 });
 
