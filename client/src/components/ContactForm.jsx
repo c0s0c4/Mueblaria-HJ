@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "/home/ubuntu/client/client/src/CSS/contacto.css";
+import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/contacto.css";
 
 const Contacto = () => {
   const [form, setForm] = useState({
