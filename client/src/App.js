@@ -10,14 +10,20 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    fetch("/api/productos")
-      .then((res) => res.json())
+    fetch("http://localhost:3000/api/productos")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Error HTTP: ${res.status} `);
+        }
+        return res.json();
+      })
       .then((data) => {
         setProductos(data);
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        console.error("Error al obtener productos:", err);
+        setError("No se pudieron cargar los productos.");
         setLoading(false);
       });
   }, []);
