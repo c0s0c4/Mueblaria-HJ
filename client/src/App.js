@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ProductList from "./components/ProductList";
 import Navbar from "./components/Navbar";
 import Home from './components/Home.jsx';
 import Nosotros from './components/Nosotros.jsx';
