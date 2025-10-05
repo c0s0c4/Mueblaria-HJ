@@ -1,8 +1,8 @@
-import "/home/ubuntu/client/client/src/CSS/ProductosCard.css";
+import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/ProductosCard.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { productos } from "/home/ubuntu/client/client/src/productos.js";
-import "/home/ubuntu/client/client/src/CSS/Menu.css";
+import { productos } from "/home/ubuntu/Mueblaria-HJ-6/client/src/productos.js";
+import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/Menu.css";
 
 function ProductosCard() {
   const [search, setSearch] = useState("");
