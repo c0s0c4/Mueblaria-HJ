@@ -8,7 +8,18 @@ import ProductosCard from './components/ProductosCard.jsx';
 import DetalleProducto from './components/DetalleProducto.jsx';
 import Contacto from './components/Contacto.jsx';
 
-function App() {
+function Navigation() {
+  return (
+    <nav className="navigation">
+      <Link to="/">Inicio</Link> |{" "}
+      <Link to="/nosotros">Nosotros</Link> |{" "}
+      <Link to="/productos">Productos</Link>
+      <Link to="/contacto">Contacto</Link>
+    </nav>
+  );
+}
+
+function App()  {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,5 +64,23 @@ function App() {
     </div>
   );
 }
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        {/* Menú de navegación */}
+        <Navigation />
 
+        {/* Rutas */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/productos" element={<ProductosCard />} />
+          <Route path="/productos/:productoKey" element={<DetalleProducto />} />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 export default App;
