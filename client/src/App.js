@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Home from './components/Home.jsx';
-import Nosotros from './components/Nosotros.jsx';
-import ProductosCard from './components/ProductosCard.jsx';
-import DetalleProducto from './components/DetalleProducto.jsx';
-import Contacto from './components/Contacto.jsx';
+import Home from '/home/ubuntu/Mueblaria-HJ-6/client/src/components/Home.jsx';
+import Nosotros from '/home/ubuntu/Mueblaria-HJ-6/client/src/components/Nosotros.jsx';
+import ProductosCard from '/home/ubuntu/Mueblaria-HJ-6/client/src/components/ProductCard.jsx';
+import DetalleProducto from '/home/ubuntu/Mueblaria-HJ-6/client/src/components/ProductDetail.jsx';
+import Contacto from '/home/ubuntu/Mueblaria-HJ-6/client/src/components/ContactForm.jsx';
 
 function Navigation() {
   return (
