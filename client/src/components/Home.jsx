@@ -1,6 +1,6 @@
 
 import "/home/ubuntu/client/client/src/CSS/Home.css";
-import "/home/ubuntu/client/client/src/CSS/Menu.css";
+import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/Menu.css";
 
 function Home() {
 return (
