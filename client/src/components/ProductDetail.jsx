@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { productos } from "/home/ubuntu/Mueblaria-HJ-6/client/src/productosDetalle.js"; // importar productos
-import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/Detalle.css";
-import "/home/ubuntu/Mueblaria-HJ-6/client/src/CSS/Menu.css";
+import { productos } from "../src/productosDetalle.js"; // importar productos
+import "../CSS/Detalle.css";
+import "../CSS/Menu.css";
 
 function DetalleProducto() {
   const { productoKey } = useParams();
