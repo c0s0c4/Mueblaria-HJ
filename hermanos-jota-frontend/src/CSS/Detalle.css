@@ -12,30 +12,38 @@
   padding: 20px;
 }
 
-/* Contenedor principal */
+
+.detalleproducto-container { /* agrega margen lateral */
+  margin-top: 70px; /* baja todo el contenido para que no quede debajo del navbar */
+}
+
+.volver-btn {
+  margin-top: 20px;
+}
+
 .detalleproducto-producto-details {
   display: flex;
-  gap: 100px;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 60px;
-  flex-wrap: wrap;
+  gap: 60px;
+  margin-top: 40px;
 }
 
-/* Columna izquierda (imagen) */
-.detalleproducto-columna-izquierda img {
-  max-width: 800px;
-  border-radius: 8px;
-}
-
-/* Columna derecha (texto e info) */
-.detalleproducto-columna-derecha {
+.detalleproducto-columna-izquierda {
   flex: 1;
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.detalleproducto-columna-derecha {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-width: 800px;
-  margin-top: 20px;
+  justify-content: flex-start;
+    padding: 40px 40px;
 }
 
 /* Título producto */
@@ -61,6 +69,7 @@
   padding: 10px;
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
+  margin-top: 20px;
 }
 
 .detalleproducto-table th,
@@ -91,6 +100,7 @@
 
 /* Botón WhatsApp */
 .detalleproducto-Btnwhatsapp {
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -104,7 +114,7 @@
   transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #355e3b;
-  padding: 0 10px;
+  padding: 20px 10px;
 }
 
 .detalleproducto-signwsp {
@@ -182,6 +192,7 @@
   border: 1px solid #a0522d;
   border-radius: 6px;
   overflow: hidden;
+  color: #a0522d;
 }
 
 .detalleproducto-cantidad button {

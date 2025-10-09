@@ -4,13 +4,11 @@ import Footer from "./components/Footer";
 import ProductosCard from "./components/ProductCard";
 import DetalleProducto from "./components/ProductDetail";
 import ContactForm from "./components/ContactForm";
-import "./App.css";
-
-// Importar productos desde el archivo local dentro de src
-import { productos } from "./PRODUCTOS";
+import CartPopup from "./components/CartPopup";
+import FavoritesPopup from "./components/FavoritesPopup";
+import Nosotros from "./components/Nosotros";
 import { productos as productosDetalle } from "./productosDetalle";
-import CartPopup from "./components/CartPopup"; // ✅ Nuevo
-
+import "./App.css";
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -18,8 +16,14 @@ function App() {
   const [error, setError] = useState(null);
   const [currentView, setCurrentView] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  //  CARRITO
   const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false); // ✅ Nuevo
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  //  FAVORITOS
+  const [favorites, setFavorites] = useState([]);
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
   // Simular fetch de productos
   useEffect(() => {
@@ -33,11 +37,18 @@ function App() {
     }
   }, []);
 
-  // Seleccionar producto completo por id
+  // Navegación general
+  const handleNavigate = (view) => {
+    setCurrentView(view);
+    setSelectedProduct(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Seleccionar producto
   const handleSelectProduct = (id) => {
     const productoFull = productosDetalle[id];
     if (productoFull) {
-      setSelectedProduct(productoFull);
+      setSelectedProduct({ id, ...productoFull });
       setCurrentView("detalle");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -51,11 +62,10 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // ✅ Añadir al carrito
+  // --- Carrito ---
   const handleAddToCart = (producto) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === producto.id);
-
       if (existingItem) {
         return prevCart.map((item) =>
           item.id === producto.id
@@ -67,32 +77,37 @@ function App() {
     });
   };
 
-  // ✅ Eliminar producto del carrito
-  const handleRemoveFromCart = (id) => {
+  const handleRemoveFromCart = (id) =>
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
 
-  // ✅ Cambiar cantidad
-  const handleQuantityChange = (id, newCantidad) => {
+  const handleQuantityChange = (id, newCantidad) =>
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === id ? { ...item, cantidad: Math.max(newCantidad, 1) } : item
       )
     );
-  };
 
-  // ✅ Mostrar/ocultar carrito
   const toggleCart = () => setIsCartOpen((prev) => !prev);
-
-  const handleNavigate = (view) => {
-    setCurrentView(view);
-    setSelectedProduct(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
 
-  // --- Renderizado dinámico ---
+  //  --- Favoritos ---
+  const handleToggleFavorite = (producto) => {
+    setFavorites((prev) => {
+      const existe = prev.find((item) => item.id === producto.id);
+      if (existe) {
+        return prev.filter((item) => item.id !== producto.id);
+      } else {
+        return [...prev, producto];
+      }
+    });
+  };
+
+  const handleRemoveFavorite = (id) => {
+    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // --- Render principal según vista ---
   const renderContent = () => {
     if (currentView === "detalle" && selectedProduct) {
       return (
@@ -100,6 +115,9 @@ function App() {
           producto={selectedProduct}
           onBack={handleBackToCatalog}
           onAddToCart={handleAddToCart}
+          onSelectProduct={handleSelectProduct}
+          onToggleFavorite={handleToggleFavorite}
+          favorites={favorites}
         />
       );
     }
@@ -119,7 +137,11 @@ function App() {
       );
     }
 
-    // --- Vista Home ---
+    if (currentView === "nosotros") {
+      return <Nosotros handleNavigate={handleNavigate} />;
+    }
+
+    // --- HOME ---
     return (
       <>
         <section className="hero">
@@ -131,8 +153,6 @@ function App() {
               </p>
               <p className="hero-description">
                 Cada pieza cuenta la historia de manos expertas y materiales nobles.
-                Redescubrimos el arte olvidado de crear muebles que no solo sirven
-                una función, sino que se convierten en legado.
               </p>
               <div className="cta-buttons">
                 <button
@@ -156,21 +176,18 @@ function App() {
                   <div id="carrusel-caja">
                     <div className="carrusel-elemento">
                       <img
-                        className="imagenes"
                         src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png"
                         alt="Sillas Córdoba"
                       />
                     </div>
                     <div className="carrusel-elemento">
                       <img
-                        className="imagenes"
                         src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png"
                         alt="Sillón Copacabana"
                       />
                     </div>
                     <div className="carrusel-elemento">
                       <img
-                        className="imagenes"
                         src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png"
                         alt="Silla de Trabajo Belgrano"
                       />
@@ -182,6 +199,7 @@ function App() {
           </div>
         </section>
 
+        {/* --- Productos Destacados --- */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
@@ -192,26 +210,33 @@ function App() {
             </div>
 
             <div className="products-grid">
-              {Object.values(productos).slice(0, 3).map((producto) => (
-                <div
-                  key={producto.id}
-                  className="product-card"
-                  onClick={() => handleSelectProduct(producto.id)}
-                >
-                  <div className="product-image">
-                    <div className="sustainability-badge">
-                      {producto.certificacion}
+              {Object.entries(productos)
+                .slice(0, 3)
+                .map(([id, producto]) => (
+                  <div
+                    key={id}
+                    className="product-card"
+                    onClick={() => handleSelectProduct(id)}
+                  >
+                    <div className="product-image">
+                      <img
+                        src={producto.imagen}
+                        alt={producto.nombre}
+                        className="product-img"
+                      />
+                      <div className="sustainability-badge">
+                        {producto.certificacion}
+                      </div>
+                    </div>
+                    <div className="product-info">
+                      <h3 className="product-title">{producto.nombre}</h3>
+                      <p className="product-description">
+                        {producto.descripcion?.substring(0, 80)}...
+                      </p>
+                      <div className="product-price">${producto.precio}</div>
                     </div>
                   </div>
-                  <div className="product-info">
-                    <h3 className="product-title">{producto.nombre}</h3>
-                    <p className="product-description">
-                      {producto.descripcion?.substring(0, 80)}...
-                    </p>
-                    <div className="product-price">${producto.precio}</div>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             <div className="section-header" style={{ marginTop: "2rem" }}>
@@ -230,20 +255,33 @@ function App() {
 
   return (
     <div className="App">
+      {/*  Navbar principal */}
       <Navbar
         cartCount={cartCount}
+        favoritesCount={favorites.length}
         onNavigate={handleNavigate}
-        onCartClick={toggleCart} // ✅ Nuevo
+        onCartClick={() => setIsCartOpen(true)}
+        onFavoritesClick={() => setIsFavoritesOpen(true)}
       />
 
+      {/*  Contenido dinámico */}
       <main>{renderContent()}</main>
 
+      {/*  Popup del carrito */}
       <CartPopup
         isOpen={isCartOpen}
         cart={cart}
         onClose={toggleCart}
         onRemove={handleRemoveFromCart}
         onQuantityChange={handleQuantityChange}
+      />
+
+      {/*  Popup de favoritos */}
+      <FavoritesPopup
+        isOpen={isFavoritesOpen}
+        favorites={favorites}
+        onClose={() => setIsFavoritesOpen(false)}
+        onRemove={handleRemoveFavorite}
       />
 
       <Footer />

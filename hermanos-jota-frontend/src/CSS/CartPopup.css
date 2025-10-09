@@ -1,11 +1,11 @@
 .cart-popup {
   position: fixed; /* para que siga al hacer scroll */
   top: 80px;       /* distancia desde la parte superior */
-  right: 45px;     /* alineado a la derecha */
+  right: 120px;     /* alineado a la derecha */
   width: 360px;
   background-color: #ffffff; /* fondo blanco */
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+box-shadow: 0 6px 20px rgba(150, 75, 0, 0.25);
   padding: 15px;
   z-index: 1000;
   font-family: 'Segoe UI', sans-serif;
@@ -32,7 +32,7 @@
   right: 10px;
   background: none;
   border: none;
-  color: #555;
+  color: #a0522d;
   font-size: 16px;
   cursor: pointer;
 }
@@ -40,7 +40,7 @@
 h2 {
   margin: 0 0 10px 0;
   font-size: 20px;
-  color: #333;
+  color: #a0522d;
 }
 
 .cart-items {
@@ -89,7 +89,7 @@ h2 {
 .cart-quantity button {
   background-color: #ffffff;
   color: #5c4033;
-  border: 1px solid #5c4033;
+  border: 1px solid #a0522d;
   border-radius: 6px;
   width: 28px;
   height: 28px;
@@ -98,8 +98,8 @@ h2 {
 /* Botones del contador */
 .cart-quantity button {
   background-color: #ffffff;
-  color: #5c4033; /* Marrón */
-  border: 1px solid #5c4033;
+  color: #a0522d; /* Marrón */
+  border: 1px solid #a0522d;
   border-radius: 6px;
   width: 28px;
   height: 28px;
@@ -108,13 +108,13 @@ h2 {
 }
 
 .cart-quantity button:hover {
-  background-color: #5c4033;
+  background-color: #a0522d;
   color: #ffffff;
 }
 
 /* Botón eliminar */
 .remove-btn {
-  background-color: #5c4033; /* Marrón */
+  background-color: #a0522d; /* Marrón */
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -125,7 +125,7 @@ h2 {
 }
 
 .remove-btn:hover {
-  background-color: #7a5a3c; /* Marrón más claro al pasar el mouse */
+  background-color: #a0522d; /* Marrón más claro al pasar el mouse */
 }
 
 /* Botón Finalizar compra */
@@ -133,7 +133,7 @@ h2 {
   width: 100%;
   margin-top: 10px;
   padding: 10px;
-  background-color: #5c4033; /* Marrón */
+  background-color: #a0522d; /* Marrón */
   color: #ffffff;
   font-weight: bold;
   border: none;
@@ -143,5 +143,11 @@ h2 {
 }
 
 .checkout-btn:hover {
-  background-color: #7a5a3c; /* Marrón más claro al pasar el mouse */
+  background-color: #a0522d; /* Marrón más claro al pasar el mouse */
+}
+
+.cart-items-wrapper {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-top: 10px;
 }
