@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { productos as productosDetalle } from "../productosDetalle";
+import productosDetalle from "../productos";
 import "../CSS/Detalle.css";
 
 function DetalleProducto({
@@ -44,12 +44,12 @@ function DetalleProducto({
     onAddToCart({ ...producto, cantidad });
   };
 
+  // CORRECCIÓN: Usamos productosDetalle que sí está importado
   const productosRelacionados = () => {
-    const otrosProductos = Object.entries(productosDetalle)
-      .filter(([id]) => id !== producto.id)
+    return productosDetalle
+      .filter((p) => p.id !== producto.id)
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
-    return otrosProductos.map(([id, p]) => ({ id, ...p }));
   };
 
   return (
@@ -62,19 +62,19 @@ function DetalleProducto({
 
         <div className="detalleproducto-columna-derecha">
           <h2 className="detalleproducto-nombre">{producto.nombre}</h2>
-          <p className="detalleproducto-precio">${producto.precio}</p>
+          <p className="detalleproducto-precio">${producto.precio.toLocaleString()}</p>
           <p className="detalleproducto-descripcion">{producto.descripcion}</p>
 
           <table className="detalleproducto-table">
             <tbody>
               {keysOrden.map((key) =>
-                producto[key] ? (
+                producto.especificaciones[key] ? (
                   <tr key={key}>
                     <th>
                       {key.charAt(0).toUpperCase() +
                         key.slice(1).replace(/([A-Z])/g, " $1")}
                     </th>
-                    <td>{producto[key]}</td>
+                    <td>{producto.especificaciones[key]}</td>
                   </tr>
                 ) : null
               )}
@@ -127,28 +127,25 @@ function DetalleProducto({
                 Agregar al carrito
               </button>
 
-  {/* Botón de favorito */}
-                 {/* Corazón favorito */}
-                <input type="checkbox" id="favorite" name="favorite-checkbox" />
-                <label htmlFor="favorite" className="detalleproducto-container1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                  <div className="detalleproducto-action">
-                    <span className="detalleproducto-option-1">Guardar Favorito</span>
-                    <span className="detalleproducto-option-2">Guardado</span>
-                  </div>
-                </label>
-
-
+              {/* Botón de favorito */}
+              <input type="checkbox" id="favorite" name="favorite-checkbox" />
+              <label htmlFor="favorite" className="detalleproducto-container1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <div className="detalleproducto-action">
+                  <span className="detalleproducto-option-1">Guardar Favorito</span>
+                  <span className="detalleproducto-option-2">Guardado</span>
+                </div>
+              </label>
             </div>
           </div>
         </div>
@@ -175,7 +172,7 @@ function DetalleProducto({
                 <div className="product-info">
                   <h4>{p.nombre}</h4>
                   <p>{p.descripcion?.substring(0, 80)}...</p>
-                  <div className="product-price">${p.precio}</div>
+                  <div className="product-price">${p.precio.toLocaleString()}</div>
                 </div>
               </div>
             ))}

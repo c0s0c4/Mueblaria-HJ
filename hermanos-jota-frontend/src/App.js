@@ -6,8 +6,9 @@ import DetalleProducto from "./components/ProductDetail";
 import ContactForm from "./components/ContactForm";
 import CartPopup from "./components/CartPopup";
 import FavoritesPopup from "./components/FavoritesPopup";
+import productosDetalle from "./productos";
 import Nosotros from "./components/Nosotros";
-import { productos as productosDetalle } from "./productosDetalle";
+
 import "./App.css";
 
 function App() {
@@ -44,11 +45,11 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Seleccionar producto
+  // Seleccionar producto por ID
   const handleSelectProduct = (id) => {
-    const productoFull = productosDetalle[id];
+    const productoFull = productos.find((p) => p.id === parseInt(id));
     if (productoFull) {
-      setSelectedProduct({ id, ...productoFull });
+      setSelectedProduct(productoFull);
       setCurrentView("detalle");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -91,7 +92,7 @@ function App() {
 
   const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
 
-  //  --- Favoritos ---
+  // --- Favoritos ---
   const handleToggleFavorite = (producto) => {
     setFavorites((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
@@ -122,9 +123,7 @@ function App() {
       );
     }
 
-    if (currentView === "contacto") {
-      return <ContactForm />;
-    }
+    if (currentView === "contacto") return <ContactForm />;
 
     if (currentView === "productos") {
       return (
@@ -170,34 +169,13 @@ function App() {
               </div>
             </div>
 
-            <div className="banner">
-              <aside>
-                <div id="carrusel-contenido">
-                  <div id="carrusel-caja">
-                    <div className="carrusel-elemento">
-                      <img
-                        src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png"
-                        alt="Sillas Córdoba"
-                      />
-                    </div>
-                    <div className="carrusel-elemento">
-                      <img
-                        src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png"
-                        alt="Sillón Copacabana"
-                      />
-                    </div>
-                    <div className="carrusel-elemento">
-                      <img
-                        src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png"
-                        alt="Silla de Trabajo Belgrano"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </aside>
-            </div>
-          </div>
-        </section>
+<div className="banner"> <aside> <div id="carrusel-contenido">
+  <div id="carrusel-caja"> <div className="carrusel-elemento">
+    <img src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png" alt="Sillas Córdoba" />
+    </div> <div className="carrusel-elemento">
+      <img src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png" alt="Sillón Copacabana" />
+      </div> <div className="carrusel-elemento"> <img src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png" alt="Silla de Trabajo Belgrano" /> </div>
+      </div> </div> </aside> </div> </div> </section>
 
         {/* --- Productos Destacados --- */}
         <section className="section section-alt">
@@ -209,34 +187,33 @@ function App() {
               </p>
             </div>
 
-            <div className="products-grid">
-              {Object.entries(productos)
-                .slice(0, 3)
-                .map(([id, producto]) => (
-                  <div
-                    key={id}
-                    className="product-card"
-                    onClick={() => handleSelectProduct(id)}
-                  >
-                    <div className="product-image">
-                      <img
-                        src={producto.imagen}
-                        alt={producto.nombre}
-                        className="product-img"
-                      />
-                      <div className="sustainability-badge">
-                        {producto.certificacion}
-                      </div>
-                    </div>
-                    <div className="product-info">
-                      <h3 className="product-title">{producto.nombre}</h3>
-                      <p className="product-description">
-                        {producto.descripcion?.substring(0, 80)}...
-                      </p>
-                      <div className="product-price">${producto.precio}</div>
-                    </div>
-                  </div>
-                ))}
+<div className="products-grid">
+  {productos.slice(0, 3).map((producto) => (
+    <div
+      key={producto.id}
+      className="product-card"
+      onClick={() => handleSelectProduct(producto.id)}
+    >
+      <div className="product-image">
+        <img
+          src={producto.imagen}
+          alt={producto.nombre}
+          className="product-img"
+          style={{ maxWidth: "100%", height: "auto" }} // Reducción de tamaño
+        />
+        <div className="sustainability-badge">
+          {producto.certificacion}
+        </div>
+      </div>
+      <div className="product-info">
+        <h3 className="product-title">{producto.nombre}</h3>
+        <p className="product-description">
+          {producto.descripcion?.substring(0, 80)}...
+        </p>
+        <div className="product-price">${producto.precio}</div>
+      </div>
+    </div>
+  ))}
             </div>
 
             <div className="section-header" style={{ marginTop: "2rem" }}>
@@ -255,7 +232,6 @@ function App() {
 
   return (
     <div className="App">
-      {/*  Navbar principal */}
       <Navbar
         cartCount={cartCount}
         favoritesCount={favorites.length}
@@ -264,10 +240,8 @@ function App() {
         onFavoritesClick={() => setIsFavoritesOpen(true)}
       />
 
-      {/*  Contenido dinámico */}
       <main>{renderContent()}</main>
 
-      {/*  Popup del carrito */}
       <CartPopup
         isOpen={isCartOpen}
         cart={cart}
@@ -276,7 +250,6 @@ function App() {
         onQuantityChange={handleQuantityChange}
       />
 
-      {/*  Popup de favoritos */}
       <FavoritesPopup
         isOpen={isFavoritesOpen}
         favorites={favorites}

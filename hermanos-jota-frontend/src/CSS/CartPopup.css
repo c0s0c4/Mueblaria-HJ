@@ -1,7 +1,7 @@
 .cart-popup {
   position: fixed; /* para que siga al hacer scroll */
   top: 80px;       /* distancia desde la parte superior */
-  right: 120px;     /* alineado a la derecha */
+  right: 90px;     /* alineado a la derecha */
   width: 360px;
   background-color: #ffffff; /* fondo blanco */
   border-radius: 12px;

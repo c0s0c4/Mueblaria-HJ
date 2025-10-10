@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 // Middleware de manejo de errores centralizado
 app.use((err, req, res, next) => {
   console.error('Error capturado:', err.stack);
-  
+
   res.status(err.status || 500).json({
     success: false,
     mensaje: err.message || 'Error interno del servidor',

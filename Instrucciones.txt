@@ -2,7 +2,10 @@ Para probar el Backend:
 
 En la terminal de /hermanos-jota-backend
 
-npm run dev
+cd backend
+
+npm start
+
 
 Probar endpoints:
 
