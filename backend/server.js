@@ -3,7 +3,7 @@ const cors = require('cors');
 const productosRoutes = require('./routes/productosRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // ========================================
 // MIDDLEWARES GLOBALES
