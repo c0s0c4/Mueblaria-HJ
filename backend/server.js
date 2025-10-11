@@ -3,12 +3,12 @@ const cors = require('cors');
 const productosRoutes = require('./routes/productosRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // ========================================
 // MIDDLEWARES GLOBALES
 // ========================================
-
+app.use(cors());
 // Middleware para logging de peticiones
 app.use((req, res, next) => {
   const timestamp = new Date().toISOString();
