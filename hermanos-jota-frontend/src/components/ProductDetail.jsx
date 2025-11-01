@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../CSS/Detalle.css";
 
 function DetalleProducto({
-  productoId,         // Recibimos el ID del producto
+  productoId,
   onBack,
   onAddToCart,
   onSelectProduct,
@@ -14,7 +14,13 @@ function DetalleProducto({
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
 
-  // Obtener producto por ID
+  // --- función segura para mostrar precios ---
+  const formatPrice = (price) => {
+    if (typeof price === "number") return price.toLocaleString();
+    return "Consultar";
+  };
+
+  // --- Obtener producto por ID ---
   useEffect(() => {
     const fetchProducto = async () => {
       try {
@@ -30,13 +36,12 @@ function DetalleProducto({
     fetchProducto();
   }, [productoId]);
 
-  // Obtener productos relacionados
+  // --- Obtener productos relacionados ---
   useEffect(() => {
     const fetchRelacionados = async () => {
       try {
         const res = await fetch("http://localhost:3001/api/productos");
         const data = await res.json();
-        // Excluir el producto actual y tomar los primeros 3
         setProductosRelacionados(data.filter(p => p._id !== productoId).slice(0, 3));
       } catch (error) {
         console.error("Error al traer productos relacionados:", error);
@@ -86,7 +91,7 @@ function DetalleProducto({
 
         <div className="detalleproducto-columna-derecha">
           <h2 className="detalleproducto-nombre">{producto.nombre}</h2>
-          <p className="detalleproducto-precio">${producto.precio.toLocaleString()}</p>
+          <p className="detalleproducto-precio">${formatPrice(producto.precio)}</p>
           <p className="detalleproducto-descripcion">{producto.descripcion}</p>
 
           <table className="detalleproducto-table">
@@ -172,7 +177,7 @@ function DetalleProducto({
         </div>
       </section>
 
-      {/* PRODUCTOS RELACIONADOS */}
+      {/* --- PRODUCTOS RELACIONADOS --- */}
       <section className="section section-alt">
         <div className="container">
           <div className="section-title">
@@ -187,13 +192,13 @@ function DetalleProducto({
                 onClick={() => onSelectProduct && onSelectProduct(p._id)}
               >
                 <div className="product-image">
-                  <img src={p.imagen} alt={p.nombre} className="product-img"/>
+                  <img src={p.imagen} alt={p.nombre} className="product-img" />
                   {p.certificacion && <div className="sustainability-badge">{p.certificacion}</div>}
                 </div>
                 <div className="product-info">
                   <h4>{p.nombre}</h4>
                   <p>{p.descripcion?.substring(0, 80)}...</p>
-                  <div className="product-price">${p.precio.toLocaleString()}</div>
+                  <div className="product-price">${formatPrice(p.precio)}</div>
                 </div>
               </div>
             ))}
@@ -208,3 +213,4 @@ function DetalleProducto({
 }
 
 export default DetalleProducto;
+
