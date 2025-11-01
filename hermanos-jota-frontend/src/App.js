@@ -6,9 +6,7 @@ import DetalleProducto from "./components/ProductDetail";
 import ContactForm from "./components/ContactForm";
 import CartPopup from "./components/CartPopup";
 import FavoritesPopup from "./components/FavoritesPopup";
-import productosDetalle from "./productos";
 import Nosotros from "./components/Nosotros";
-
 import "./App.css";
 
 function App() {
@@ -18,34 +16,40 @@ function App() {
   const [currentView, setCurrentView] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  //  CARRITO
+  // Carrito
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  //  FAVORITOS
+  // Favoritos
   const [favorites, setFavorites] = useState([]);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
-  // Simular fetch de productos
+  // --- Fetch productos desde el backend ---
   useEffect(() => {
-    try {
-      setProductos(productosDetalle);
-    } catch (err) {
-      console.error("Error al cargar productos:", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    const fetchProductos = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/productos");
+        if (!res.ok) throw new Error("Error al cargar productos desde el backend");
+        const data = await res.json();
+        setProductos(data.data || []);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
   }, []);
 
-  // Navegación general
+  // Navegación
   const handleNavigate = (view) => {
     setCurrentView(view);
     setSelectedProduct(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Seleccionar producto por ID
   const handleSelectProduct = (id) => {
     const productoFull = productos.find((p) => p.id === parseInt(id));
     if (productoFull) {
@@ -89,26 +93,21 @@ function App() {
     );
 
   const toggleCart = () => setIsCartOpen((prev) => !prev);
-
   const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
 
   // --- Favoritos ---
   const handleToggleFavorite = (producto) => {
     setFavorites((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
-      if (existe) {
-        return prev.filter((item) => item.id !== producto.id);
-      } else {
-        return [...prev, producto];
-      }
+      if (existe) return prev.filter((item) => item.id !== producto.id);
+      return [...prev, producto];
     });
   };
 
-  const handleRemoveFavorite = (id) => {
+  const handleRemoveFavorite = (id) =>
     setFavorites((prev) => prev.filter((item) => item.id !== id));
-  };
 
-  // --- Render principal según vista ---
+  // --- Renderizar según vista ---
   const renderContent = () => {
     if (currentView === "detalle" && selectedProduct) {
       return (
@@ -136,9 +135,7 @@ function App() {
       );
     }
 
-    if (currentView === "nosotros") {
-      return <Nosotros handleNavigate={handleNavigate} />;
-    }
+    if (currentView === "nosotros") return <Nosotros handleNavigate={handleNavigate} />;
 
     // --- HOME ---
     return (
@@ -147,80 +144,70 @@ function App() {
           <div className="hero-container">
             <div className="hero-content">
               <h1>EL ARTE DE CREAR MUEBLES QUE ALIMENTAN EL ALMA</h1>
-              <p className="hero-subtitle">
-                Donde la herencia se encuentra con la innovación
-              </p>
+              <p className="hero-subtitle">Donde la herencia se encuentra con la innovación</p>
               <p className="hero-description">
                 Cada pieza cuenta la historia de manos expertas y materiales nobles.
               </p>
               <div className="cta-buttons">
-                <button
-                  onClick={() => handleNavigate("productos")}
-                  className="btn btn-primary"
-                >
+                <button onClick={() => handleNavigate("productos")} className="btn btn-primary">
                   Ver Colección
                 </button>
-                <button
-                  onClick={() => handleNavigate("contacto")}
-                  className="btn btn-secondary"
-                >
+                <button onClick={() => handleNavigate("contacto")} className="btn btn-secondary">
                   Contacto
                 </button>
               </div>
             </div>
-
-<div className="banner"> <aside> <div id="carrusel-contenido">
+            <div className="banner"> <aside> <div id="carrusel-contenido">
   <div id="carrusel-caja"> <div className="carrusel-elemento">
     <img src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png" alt="Sillas Córdoba" />
     </div> <div className="carrusel-elemento">
       <img src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png" alt="Sillón Copacabana" />
       </div> <div className="carrusel-elemento"> <img src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png" alt="Silla de Trabajo Belgrano" /> </div>
       </div> </div> </aside> </div> </div> </section>
+         
 
-        {/* --- Productos Destacados --- */}
         <section className="section section-alt">
           <div className="container">
             <div className="section-header">
               <h2 className="section-title">PRODUCTOS DESTACADOS</h2>
-              <p className="section-subtitle">
-                Un adelanto de nuestra colección artesanal
-              </p>
+              <p className="section-subtitle">Un adelanto de nuestra colección artesanal</p>
             </div>
 
-<div className="products-grid">
-  {productos.slice(0, 3).map((producto) => (
-    <div
-      key={producto.id}
-      className="product-card"
-      onClick={() => handleSelectProduct(producto.id)}
-    >
-      <div className="product-image">
-        <img
-          src={producto.imagen}
-          alt={producto.nombre}
-          className="product-img"
-          style={{ maxWidth: "100%", height: "auto" }} // Reducción de tamaño
-        />
-        <div className="sustainability-badge">
-          {producto.certificacion}
-        </div>
-      </div>
-      <div className="product-info">
-        <h3 className="product-title">{producto.nombre}</h3>
-        <p className="product-description">
-          {producto.descripcion?.substring(0, 80)}...
-        </p>
-        <div className="product-price">${producto.precio}</div>
-      </div>
-    </div>
-  ))}
+            <div className="products-grid">
+              {loading && <p>Cargando productos...</p>}
+              {error && <p>Error: {error}</p>}
+              {!loading &&
+                !error &&
+                productos.slice(0, 3).map((producto) => (
+                  <div
+                    key={producto.id}
+                    className="product-card"
+                    onClick={() => handleSelectProduct(producto.id)}
+                  >
+                    <div className="product-image">
+                      <img
+                        src={producto.imagen}
+                        alt={producto.nombre}
+                        className="product-img"
+                        style={{ maxWidth: "100%", height: "auto" }}
+                      />
+                      {producto.certificacion && (
+                        <div className="sustainability-badge">{producto.certificacion}</div>
+                      )}
+                    </div>
+                    <div className="product-info">
+                      <h3 className="product-title">{producto.nombre}</h3>
+                      <p className="product-description">
+                        {producto.descripcion?.substring(0, 80)}...
+                      </p>
+                      <div className="product-price">${producto.precio}</div>
+                    </div>
+                  </div>
+                ))}
             </div>
 
             <div className="section-header" style={{ marginTop: "2rem" }}>
-              <button
-                onClick={() => handleNavigate("productos")}
-                className="btn btn-secondary"
-              >
+              <button onClick={() => handleNavigate("productos")} className="btn btn-secondary">
                 Ver Todos los Productos
               </button>
             </div>
