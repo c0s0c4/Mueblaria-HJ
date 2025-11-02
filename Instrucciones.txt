@@ -4,8 +4,9 @@ Dentro de la carpeta Backend crear archivo ".env" siguiendo el ejemplo de ".env.
 
 En la terminal de /Backend:
 
-npm run dev
+npm run seed
 
+npm run dev
 
 Probar endpoints:
 
