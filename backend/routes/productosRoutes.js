@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   try {
     // Opcional: filtrado por categoría si se envía query param
     const { categoria } = req.query;
-
+    
     if (categoria) {
       const productosFiltrados = productos.filter(
         p => p.categoria.toLowerCase() === categoria.toLowerCase()
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   try {
     const id = parseInt(req.params.id);
-
+    
     // Validar que el ID sea un número
     if (isNaN(id)) {
       return res.status(400).json({
