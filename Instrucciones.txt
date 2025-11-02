@@ -1,10 +1,10 @@
 Para probar el Backend:
 
-En la terminal de /hermanos-jota-backend
+Dentro de la carpeta Backend crear archivo ".env" siguiendo el ejemplo de ".env.example" y completar los campos con los datos requeridos.
 
-cd backend
+En la terminal de /Backend:
 
-npm start
+npm run dev
 
 
 Probar endpoints:
@@ -24,8 +24,6 @@ Probar endpoints:
 Para probar el Front:
 
 En la terminal de /hermanos-jota-frontend
-
-cd hermanos-jota-frontend
 
 npm install (una vez para instalar el node_modules)
 
