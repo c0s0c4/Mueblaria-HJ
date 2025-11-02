@@ -216,5 +216,5 @@ const productos = [
       enStock: true
     }
   ];
-
+  
   module.exports = productos;
