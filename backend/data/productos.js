@@ -7,7 +7,7 @@ const productos = [
       categoria: "aparadores",
       material: "Nogal macizo",
       certificacion: "FSC",
-      imagen: "aparador-uspallata.jpg",
+      imagen: "https://i.postimg.cc/ZRVSZNLk/Aparador-Uspallata.png",
       especificaciones: {
         medidas: "180x45x75 cm",
         materiales: "Nogal macizo FSC®, herrajes de latón",
@@ -25,7 +25,7 @@ const productos = [
       categoria: "bibliotecas",
       material: "Acero y Roble",
       certificacion: "FSC",
-      imagen: "biblioteca-recoleta.jpg",
+      imagen: "https://i.postimg.cc/MHpjKy25/Biblioteca-Recoleta.png",
       especificaciones: {
         medidas: "100x35x200 cm",
         materiales: "Estructura de acero, estantes de roble",
@@ -43,7 +43,7 @@ const productos = [
       categoria: "butacas",
       material: "Guatambú y Bouclé",
       certificacion: "Premium",
-      imagen: "butaca-mendoza.jpg",
+      imagen: "https://i.postimg.cc/6qpG5dJ0/Butaca-Mendoza.png",
       especificaciones: {
         medidas: "80x75x85 cm",
         materiales: "Guatambú macizo, tela bouclé",
@@ -61,7 +61,7 @@ const productos = [
       categoria: "sillones",
       material: "Cuero y Acero",
       certificacion: "Premium",
-      imagen: "sillon-copacabana.jpg",
+      imagen: "https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png",
       especificaciones: {
         medidas: "90x85x95 cm",
         materiales: "Cuero curtido vegetal, acero pintado",
@@ -79,7 +79,7 @@ const productos = [
       categoria: "mesas",
       material: "Mármol y Nogal",
       certificacion: "Premium",
-      imagen: "mesa-centro-araucaria.jpg",
+      imagen: "https://i.postimg.cc/HntD3yVZ/Mesa-de-Centro-Araucaria.png",
       especificaciones: {
         medidas: "90x90x45 cm",
         materiales: "Sobre de mármol Patagonia, patas de nogal",
@@ -97,7 +97,7 @@ const productos = [
       categoria: "mesas",
       material: "Roble macizo",
       certificacion: "FSC",
-      imagen: "mesa-noche-aconcagua.jpg",
+      imagen: "https://i.postimg.cc/MHY2tQn2/Mesa-de-Noche-Aconcagua.png",
       especificaciones: {
         medidas: "45x35x60 cm",
         materiales: "Roble macizo FSC®, herrajes soft-close",
@@ -115,7 +115,7 @@ const productos = [
       categoria: "camas",
       material: "Roble y Lino",
       certificacion: "FSC",
-      imagen: "cama-neuquen.jpg",
+      imagen: "https://i.postimg.cc/prBr8yxx/descarga.png",
       especificaciones: {
         medidas: "160x200x90 cm",
         materiales: "Roble macizo FSC® tapizado en lino",
@@ -133,7 +133,7 @@ const productos = [
       categoria: "sofas",
       material: "Eucalipto y Lino",
       certificacion: "FSC",
-      imagen: "sofa-patagonia.jpg",
+      imagen: "https://i.postimg.cc/9FWj0JnP/Sof-Patagonia.png",
       especificaciones: {
         medidas: "220x90x80 cm",
         estructura: "Madera de eucalipto certificada FSC®",
@@ -151,7 +151,7 @@ const productos = [
       categoria: "mesas",
       material: "Roble macizo",
       certificacion: "FSC",
-      imagen: "mesa-comedor-pampa.jpg",
+      imagen: "https://i.postimg.cc/1XKhMq8x/Mesa-Comedor-Pampa.png",
       especificaciones: {
         medidas: "160/240x90x75 cm",
         materiales: "Roble macizo FSC®, mecanismo alemán",
@@ -169,7 +169,7 @@ const productos = [
       categoria: "sillas",
       material: "Nogal y Acero",
       certificacion: "Premium",
-      imagen: "sillas-cordoba.jpg",
+      imagen: "https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png",
       especificaciones: {
         medidas: "45x52x80 cm (cada una)",
         materiales: "Contrachapado nogal, tubo de acero",
@@ -187,7 +187,7 @@ const productos = [
       categoria: "escritorios",
       material: "Bambú laminado",
       certificacion: "Sustentable",
-      imagen: "escritorio-costa.jpg",
+      imagen: "https://i.postimg.cc/ZKThnVMF/Escritorio-Costa.png",
       especificaciones: {
         medidas: "120x60x75 cm",
         materiales: "Bambú laminado, herrajes ocultos",
@@ -205,7 +205,7 @@ const productos = [
       categoria: "sillas",
       material: "Malla técnica y Tejido reciclado",
       certificacion: "Ergonómica",
-      imagen: "silla-trabajo-belgrano.jpg",
+      imagen: "https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png",
       especificaciones: {
         medidas: "60x60x90-100 cm",
         materiales: "Malla técnica, tejido reciclado",
