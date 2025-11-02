@@ -186,7 +186,7 @@ function App() {
                   >
                     <div className="product-image">
                       <img
-                        src={producto.imagen}
+                        src={producto.imagenUrl}
                         alt={producto.nombre}
                         className="product-img"
                         style={{ maxWidth: "100%", height: "auto" }}

@@ -56,9 +56,9 @@ app.get('/', (req, res) => {
 // Rutas de productos
 app.use('/api/productos', productRoutes);
 
-// ========================================
+
 // MANEJO DE ERRORES
-// ========================================
+
 
 // 404
 app.use((req, res) => {
@@ -71,7 +71,7 @@ app.use((req, res) => {
 
 // Manejador de errores global
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.stack);
+  console.error('Error:', err.stack);
   res.status(err.status || 500).json({
     success: false,
     mensaje: err.message || 'Error interno del servidor',
@@ -79,16 +79,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ========================================
+
 // INICIAR SERVIDOR
-// ========================================
+
 
 app.listen(PORT, () => {
   console.log('========================================');
-  console.log('🚀 Servidor Express + MongoDB');
+  console.log(' Servidor Express + MongoDB');
   console.log('========================================');
-  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`🗄️  Base de datos: MongoDB Atlas`);
-  console.log(`🌍 Entorno: ${process.env.NODE_ENV || 'development'}`);
+  console.log(` Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`  Base de datos: MongoDB Atlas`);
+  console.log(` Entorno: ${process.env.NODE_ENV || 'development'}`);
   console.log('========================================');
 });
