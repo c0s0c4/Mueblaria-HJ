@@ -50,16 +50,19 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSelectProduct = (id) => {
-    const productoFull = productos.find((p) => p.id === parseInt(id));
-    if (productoFull) {
-      setSelectedProduct(productoFull);
-      setCurrentView("detalle");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      console.error("Producto no encontrado:", id);
-    }
-  };
+ const handleSelectProduct = (id) => {
+  const productoFull = productos.find(
+    (p) => p.id === id || p._id === id || p.idProducto === id
+  );
+  if (productoFull) {
+    setSelectedProduct(productoFull);
+    setCurrentView("detalle");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    console.error("Producto no encontrado:", id, productos);
+  }
+};
+
 
   const handleBackToCatalog = () => {
     setSelectedProduct(null);
