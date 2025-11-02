@@ -6,7 +6,6 @@ cd backend
 
 npm start
 
-
 Probar endpoints:
 
    # Obtener todos los productos
@@ -29,4 +28,4 @@ cd hermanos-jota-frontend
 
 npm install (una vez para instalar el node_modules)
 
-npm start
+npm start   (verificar que habra en el localhost 3000)

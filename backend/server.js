@@ -5,9 +5,9 @@ const productosRoutes = require('./routes/productosRoutes');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// ========================================
+
 // MIDDLEWARES GLOBALES
-// ========================================
+
 app.use(cors());
 // Middleware para logging de peticiones
 app.use((req, res, next) => {
@@ -28,9 +28,9 @@ app.use(express.json());
 // Middleware para parsear datos de formularios
 app.use(express.urlencoded({ extended: true }));
 
-// ========================================
+
 // RUTAS
-// ========================================
+
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
@@ -47,9 +47,9 @@ app.get('/', (req, res) => {
 // Rutas de productos
 app.use('/api/productos', productosRoutes);
 
-// ========================================
+
 // MANEJO DE ERRORES
-// ========================================
+
 
 // Middleware para rutas no encontradas (404)
 app.use((req, res, next) => {
@@ -72,9 +72,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ========================================
 // INICIAR SERVIDOR
-// ========================================
+
 
 app.listen(PORT, () => {
   console.log('========================================');

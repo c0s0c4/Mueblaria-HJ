@@ -1,25 +1,69 @@
-import React, { useState } from "react";
-import productosDetalle from "../productos";
+import React, { useState, useEffect } from "react";
 import "../CSS/Detalle.css";
 
 function DetalleProducto({
-  producto,
+  productoId,
   onBack,
   onAddToCart,
   onSelectProduct,
-  favorites,          // agregado
-  onToggleFavorite    // agregado
+  favorites,
+  onToggleFavorite
 }) {
+  const [producto, setProducto] = useState(null);
+  const [productosRelacionados, setProductosRelacionados] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
 
-  if (!producto) {
-    return (
-      <div className="detalleproducto-no-producto">
-        <p>Producto no encontrado.</p>
-        <button onClick={onBack}>← Volver al catálogo</button>
-      </div>
-    );
-  }
+  // --- función segura para mostrar precios ---
+  const formatPrice = (price) => {
+    if (typeof price === "number") return price.toLocaleString();
+    return "Consultar";
+  };
+
+  // --- Obtener producto por ID ---
+  useEffect(() => {
+    const fetchProducto = async () => {
+      try {
+        const res = await fetch(`http://localhost:3001/api/productos/${productoId}`);
+        const data = await res.json();
+        setProducto(data);
+      } catch (error) {
+        console.error("Error al traer el producto:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducto();
+  }, [productoId]);
+
+  // --- Obtener productos relacionados ---
+  useEffect(() => {
+    const fetchRelacionados = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/productos");
+        const data = await res.json();
+        setProductosRelacionados(data.filter(p => p._id !== productoId).slice(0, 3));
+      } catch (error) {
+        console.error("Error al traer productos relacionados:", error);
+      }
+    };
+    fetchRelacionados();
+  }, [productoId]);
+
+  const aumentarCantidad = () => setCantidad((prev) => prev + 1);
+  const disminuirCantidad = () => setCantidad((prev) => (prev > 1 ? prev - 1 : 1));
+  const handleAddToCart = () => {
+    onAddToCart({ ...producto, cantidad });
+  };
+
+  const enviarWhatsApp = () => {
+    const telefono = "5491122334455";
+    const mensaje = `¡Hola! Estoy interesado/a en el producto ${producto?.nombre}.
+¿Podrían contarme más detalles sobre precio, disponibilidad o envío?
+¡Muchas gracias!`;
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  };
 
   const keysOrden = [
     "medidas", "materiales", "acabado", "peso", "capacidad", "tapizado",
@@ -28,29 +72,14 @@ function DetalleProducto({
     "sostenibilidad", "incluye", "apilables", "regulacion", "cables"
   ];
 
-  const enviarWhatsApp = () => {
-    const telefono = "5491122334455";
-    const mensaje = `¡Hola! Estoy interesado/a en el producto ${producto.nombre}.
-¿Podrían contarme más detalles sobre precio, disponibilidad o envío?
-¡Muchas gracias!`;
-    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
-  };
-
-  const aumentarCantidad = () => setCantidad((prev) => prev + 1);
-  const disminuirCantidad = () => setCantidad((prev) => (prev > 1 ? prev - 1 : 1));
-
-  const handleAddToCart = () => {
-    onAddToCart({ ...producto, cantidad });
-  };
-
-  // CORRECCIÓN: Usamos productosDetalle que sí está importado
-  const productosRelacionados = () => {
-    return productosDetalle
-      .filter((p) => p.id !== producto.id)
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-  };
+  if (loading) return <p>Cargando producto...</p>;
+  if (!producto)
+    return (
+      <div className="detalleproducto-no-producto">
+        <p>Producto no encontrado.</p>
+        <button onClick={onBack}>← Volver al catálogo</button>
+      </div>
+    );
 
   return (
     <div className="detalleproducto-container">
@@ -62,13 +91,13 @@ function DetalleProducto({
 
         <div className="detalleproducto-columna-derecha">
           <h2 className="detalleproducto-nombre">{producto.nombre}</h2>
-          <p className="detalleproducto-precio">${producto.precio.toLocaleString()}</p>
+          <p className="detalleproducto-precio">${formatPrice(producto.precio)}</p>
           <p className="detalleproducto-descripcion">{producto.descripcion}</p>
 
           <table className="detalleproducto-table">
             <tbody>
               {keysOrden.map((key) =>
-                producto.especificaciones[key] ? (
+                producto.especificaciones?.[key] ? (
                   <tr key={key}>
                     <th>
                       {key.charAt(0).toUpperCase() +
@@ -112,7 +141,6 @@ function DetalleProducto({
                 className="detalleproducto-cartBtn"
                 onClick={handleAddToCart}
               >
-                {/* ICONO CARRITO */}
                 <svg
                   className="detalleproducto-cart"
                   fill="white"
@@ -122,8 +150,6 @@ function DetalleProducto({
                 >
                   <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path>
                 </svg>
-
-                {/* TEXTO */}
                 Agregar al carrito
               </button>
 
@@ -151,7 +177,7 @@ function DetalleProducto({
         </div>
       </section>
 
-      {/* PRODUCTOS RELACIONADOS */}
+      {/* --- PRODUCTOS RELACIONADOS --- */}
       <section className="section section-alt">
         <div className="container">
           <div className="section-title">
@@ -159,20 +185,20 @@ function DetalleProducto({
           </div>
 
           <div className="products-grid">
-            {productosRelacionados().map(p => (
+            {productosRelacionados.map(p => (
               <div
-                key={p.id}
+                key={p._id}
                 className="product-card"
-                onClick={() => onSelectProduct && onSelectProduct(p.id)}
+                onClick={() => onSelectProduct && onSelectProduct(p._id)}
               >
                 <div className="product-image">
-                  <img src={p.imagen} alt={p.nombre} className="product-img"/>
+                  <img src={p.imagen} alt={p.nombre} className="product-img" />
                   {p.certificacion && <div className="sustainability-badge">{p.certificacion}</div>}
                 </div>
                 <div className="product-info">
                   <h4>{p.nombre}</h4>
                   <p>{p.descripcion?.substring(0, 80)}...</p>
-                  <div className="product-price">${p.precio.toLocaleString()}</div>
+                  <div className="product-price">${formatPrice(p.precio)}</div>
                 </div>
               </div>
             ))}
@@ -187,3 +213,4 @@ function DetalleProducto({
 }
 
 export default DetalleProducto;
+
