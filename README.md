@@ -14,6 +14,82 @@ El proyecto se divide en diferentes sprints que abarcan desde la maquetación in
 ---
 
 ##  Estructura del proyecto
+Mueblaria-HJ-main/
+│── Instrucciones.txt
+│── PersonalTemplate.html
+│── README.md
+│── package-lock.json
+│── package.json
+│
+├── .vscode/
+│   └── settings.json
+│
+├── backend/
+│   │── .envexample
+│   │── .gitignore
+│   │── package-lock.json
+│   │── package.json
+│   │── server.js
+│   │
+│   ├── config/
+│   │   └── database.js
+│   │
+│   ├── models/
+│   │   └── Product.js
+│   │
+│   ├── routes/
+│   │   └── productRoutes.js
+│   │
+│   ├── scripts/
+│   │   └── seedDatabase.js
+│
+├── hermanos-jota-frontend/
+│   │── .env
+│   │── .gitignore
+│   │── README.md
+│   │── package-lock.json
+│   │── package.json
+│   │
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo.svg
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   │
+│   ├── src/
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── productos.js
+│   │   ├── reportWebVitals.js
+│   │   ├── setupTests.js
+│   │
+│   │   ├── CSS/
+│   │   │   ├── CartPopup.css
+│   │   │   ├── Detalle.css
+│   │   │   ├── FavoritesPopup.css
+│   │   │   ├── Home.css
+│   │   │   ├── Menu.css
+│   │   │   ├── Nosotros.css
+│   │   │   ├── ProductosCard.css
+│   │   │   └── contacto.css
+│   │
+│   │   ├── components/
+│   │   │   ├── CartPopup.jsx
+│   │   │   ├── ContactForm.jsx
+│   │   │   ├── FavoritesPopup.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Nosotros.jsx
+│   │   │   ├── ProductCard.jsx
+│   │   │   ├── ProductDetail.jsx
+│   │   │   └── ProductList.js
+│
+└── (archivos raíz y carpetas varias del entorno React y Node)
 
 
 
