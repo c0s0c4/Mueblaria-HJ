@@ -13,53 +13,85 @@ El proyecto se divide en diferentes sprints que abarcan desde la maquetación in
 
 ---
 
-##  Objetivos
-1. Construir un sitio web responsive y funcional para una mueblería.
-2. Implementar navegación clara entre las secciones principales (Inicio, Productos, Detalle, Nosotros, Contacto).
-3. Simular la experiencia de un carrito de compras.
-4. Integrar recursos gráficos e identitarios de la marca.
-5. Preparar la base para futuras integraciones con backend y base de datos.
-
----
-
-## Tecnologías utilizadas
-- **Frontend**
-  - HTML5
-  - CSS3
-  - JavaScript
-
-- **Gestión del proyecto**
-  - Git y GitHub (control de versiones)
-  - Metodología ágil por sprints
-
----
-
 ##  Estructura del proyecto
+Mueblaria-HJ-main/
+│── Instrucciones.txt
+│── PersonalTemplate.html
+│── README.md
+│── package-lock.json
+│── package.json
+│
+├── .vscode/
+│   └── settings.json
+│
+├── backend/
+│   │── .envexample
+│   │── .gitignore
+│   │── package-lock.json
+│   │── package.json
+│   │── server.js
+│   │
+│   ├── config/
+│   │   └── database.js
+│   │
+│   ├── models/
+│   │   └── Product.js
+│   │
+│   ├── routes/
+│   │   └── productRoutes.js
+│   │
+│   ├── scripts/
+│   │   └── seedDatabase.js
+│
+├── hermanos-jota-frontend/
+│   │── .env
+│   │── .gitignore
+│   │── README.md
+│   │── package-lock.json
+│   │── package.json
+│   │
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo.svg
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   │
+│   ├── src/
+│   │   ├── App.css
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── productos.js
+│   │   ├── reportWebVitals.js
+│   │   ├── setupTests.js
+│   │
+│   │   ├── CSS/
+│   │   │   ├── CartPopup.css
+│   │   │   ├── Detalle.css
+│   │   │   ├── FavoritesPopup.css
+│   │   │   ├── Home.css
+│   │   │   ├── Menu.css
+│   │   │   ├── Nosotros.css
+│   │   │   ├── ProductosCard.css
+│   │   │   └── contacto.css
+│   │
+│   │   ├── components/
+│   │   │   ├── CartPopup.jsx
+│   │   │   ├── ContactForm.jsx
+│   │   │   ├── FavoritesPopup.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Nosotros.jsx
+│   │   │   ├── ProductCard.jsx
+│   │   │   ├── ProductDetail.jsx
+│   │   │   └── ProductList.js
+│
+└── (archivos raíz y carpetas varias del entorno React y Node)
 
-Mueblaria-HJ/
-│── index.html # Página principal
-│── productos.html # Catálogo de productos
-│── producto.html # Detalle de un producto
-│── nosotros.html # Información sobre la empresa
-│── contacto.html # Formulario de contacto
-│
-├── css/
-│ ├── index.css
-│ ├── producto.css
-│ ├── nosotros.css
-│ ├── contacto.css
-│ ├── menu.css
-│ └── styles.css
-│
-├── js/
-│ ├── app.js
-│ └── productos.js
-│
-├── KitDeImágenes/ # Recursos gráficos (productos, íconos, logos)
-├── img/ # Recursos gráficos (productos, íconos, logos)
-│
-├── LICENSE
-└── README.md
+
 
 ---
 
@@ -72,21 +104,6 @@ Mueblaria-HJ/
 - **Sección “Nosotros”:** historia y presentación de la empresa.
 - **Sección “Contacto”:** formulario para que el usuario se comunique con la mueblería.
 
----
-
-##  Estado de avance por sprints
-
-- **Sprint 1 :**
-  - Maquetación en HTML
-  - Estilos base en CSS
-  - Creación de estructura de navegación
-
-- **Sprint 2 :**
-  - Interacción con JavaScript
-  - Carrito de compras (simulación)
-  - Dinamismo en productos
-
----
 
 ##  Equipo de trabajo
 
