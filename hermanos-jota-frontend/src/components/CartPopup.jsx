@@ -31,7 +31,7 @@ function CartPopup({ isOpen, cart = [], onClose, onRemove, onQuantityChange }) {
           <ul className="cart-items">
             {cart.map((item) => (
               <li key={item.id} className="cart-item">
-                <img src={item.imagen} alt={item.nombre} className="cart-item-image" />
+                <img src={item.imagenUrl} alt={item.nombre} className="cart-item-image" />
                 <div className="cart-item-info">
                   <h4>{item.nombre}</h4>
                   <p>${item.precio}</p>

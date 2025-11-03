@@ -2,63 +2,62 @@ import React, { useState, useEffect } from "react";
 import "../CSS/Detalle.css";
 
 function DetalleProducto({
-  productoId,
+  producto,
   onBack,
   onAddToCart,
   onSelectProduct,
   favorites,
-  onToggleFavorite
+  onToggleFavorite,
 }) {
-  const [producto, setProducto] = useState(null);
-  const [productosRelacionados, setProductosRelacionados] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
+  const [productosRelacionados, setProductosRelacionados] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // --- función segura para mostrar precios ---
-  const formatPrice = (price) => {
-    if (typeof price === "number") return price.toLocaleString();
-    return "Consultar";
+  const formatPrice = (price) =>
+    typeof price === "number" ? price.toLocaleString() : "Consultar";
+
+  // --- Fetch productos desde el backend ---
+ useEffect(() => {
+  const fetchProductos = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:3001/api/productos");
+      if (!res.ok) throw new Error("Error al cargar productos desde el backend");
+      const data = await res.json();
+      // Filtrar para no incluir el producto actual
+      let relacionados = (data.data || []).filter((p) => p.id !== producto.id);
+
+      // Mezclar el array
+      relacionados = relacionados.sort(() => 0.5 - Math.random());
+
+      // Tomar solo 3 productos
+      relacionados = relacionados.slice(0, 3);
+
+      setProductosRelacionados(relacionados);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // --- Obtener producto por ID ---
-  useEffect(() => {
-    const fetchProducto = async () => {
-      try {
-        const res = await fetch(`http://localhost:3001/api/productos/${productoId}`);
-        const data = await res.json();
-        setProducto(data);
-      } catch (error) {
-        console.error("Error al traer el producto:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProducto();
-  }, [productoId]);
-
-  // --- Obtener productos relacionados ---
-  useEffect(() => {
-    const fetchRelacionados = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/api/productos");
-        const data = await res.json();
-        setProductosRelacionados(data.filter(p => p._id !== productoId).slice(0, 3));
-      } catch (error) {
-        console.error("Error al traer productos relacionados:", error);
-      }
-    };
-    fetchRelacionados();
-  }, [productoId]);
+  fetchProductos();
+}, [producto]);
 
   const aumentarCantidad = () => setCantidad((prev) => prev + 1);
-  const disminuirCantidad = () => setCantidad((prev) => (prev > 1 ? prev - 1 : 1));
+  const disminuirCantidad = () =>
+    setCantidad((prev) => (prev > 1 ? prev - 1 : 1));
+
   const handleAddToCart = () => {
-    onAddToCart({ ...producto, cantidad });
+    if (producto) onAddToCart({ ...producto, cantidad });
   };
 
   const enviarWhatsApp = () => {
+    if (!producto) return;
     const telefono = "5491122334455";
-    const mensaje = `¡Hola! Estoy interesado/a en el producto ${producto?.nombre}.
+    const mensaje = `¡Hola! Estoy interesado/a en el producto ${producto.nombre}.
 ¿Podrían contarme más detalles sobre precio, disponibilidad o envío?
 ¡Muchas gracias!`;
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
@@ -69,24 +68,24 @@ function DetalleProducto({
     "medidas", "materiales", "acabado", "peso", "capacidad", "tapizado",
     "confort", "rotacion", "garantia", "almacenamiento", "caracteristicas",
     "modulares", "cargaMaxima", "extension", "colchon", "relleno",
-    "sostenibilidad", "incluye", "apilables", "regulacion", "cables"
+    "sostenibilidad", "incluye", "apilables", "regulacion", "cables",
   ];
 
-  if (loading) return <p>Cargando producto...</p>;
-  if (!producto)
+  if (!producto) {
     return (
       <div className="detalleproducto-no-producto">
         <p>Producto no encontrado.</p>
         <button onClick={onBack}>← Volver al catálogo</button>
       </div>
     );
+  }
 
   return (
     <div className="detalleproducto-container">
-      {/* === PARTE SUPERIOR: DETALLES, WHATSAPP, CARRITO, FAVORITO === */}
+      {/* DETALLE DEL PRODUCTO */}
       <section className="detalleproducto-producto-details">
         <div className="detalleproducto-columna-izquierda">
-          <img src={producto.imagen} alt={producto.nombre} />
+          <img src={producto.imagen || producto.imagenUrl} alt={producto.nombre} />
         </div>
 
         <div className="detalleproducto-columna-derecha">
@@ -96,22 +95,22 @@ function DetalleProducto({
 
           <table className="detalleproducto-table">
             <tbody>
-              {keysOrden.map((key) =>
-                producto.especificaciones?.[key] ? (
-                  <tr key={key}>
-                    <th>
-                      {key.charAt(0).toUpperCase() +
-                        key.slice(1).replace(/([A-Z])/g, " $1")}
-                    </th>
-                    <td>{producto.especificaciones[key]}</td>
-                  </tr>
-                ) : null
+              {keysOrden.map(
+                (key) =>
+                  producto.especificaciones?.[key] && (
+                    <tr key={key}>
+                      <th>
+                        {key.charAt(0).toUpperCase() +
+                          key.slice(1).replace(/([A-Z])/g, " $1")}
+                      </th>
+                      <td>{producto.especificaciones[key]}</td>
+                    </tr>
+                  )
               )}
             </tbody>
           </table>
 
           <div className="detalleproducto-acciones">
-            {/* WhatsApp */}
             <button
               className="detalleproducto-Btnwhatsapp"
               onClick={enviarWhatsApp}
@@ -128,19 +127,14 @@ function DetalleProducto({
               <div className="detalleproducto-text">WhatsApp</div>
             </button>
 
-            {/* Contador */}
             <div className="detalleproducto-cantidad">
               <button onClick={disminuirCantidad}>-</button>
               <span>{cantidad}</span>
               <button onClick={aumentarCantidad}>+</button>
             </div>
 
-            {/* Carrito + Favorito */}
             <div className="detalleproducto-botones">
-              <button
-                className="detalleproducto-cartBtn"
-                onClick={handleAddToCart}
-              >
+              <button className="detalleproducto-cartBtn" onClick={handleAddToCart}>
                 <svg
                   className="detalleproducto-cart"
                   fill="white"
@@ -153,8 +147,12 @@ function DetalleProducto({
                 Agregar al carrito
               </button>
 
-              {/* Botón de favorito */}
-              <input type="checkbox" id="favorite" name="favorite-checkbox" />
+              <input
+                type="checkbox"
+                id="favorite"
+                checked={favorites.some((f) => f.id === producto.id)}
+                onChange={() => onToggleFavorite(producto)}
+              />
               <label htmlFor="favorite" className="detalleproducto-container1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,35 +175,50 @@ function DetalleProducto({
         </div>
       </section>
 
-      {/* --- PRODUCTOS RELACIONADOS --- */}
+      {/* GRID DE PRODUCTOS DESTACADOS */}
       <section className="section section-alt">
         <div className="container">
-          <div className="section-title">
-            <h3>Productos Relacionados</h3>
+          <div className="section-header">
+            <h2 className="section-title">Productos Recomendados</h2>
           </div>
 
           <div className="products-grid">
-            {productosRelacionados.map(p => (
-              <div
-                key={p._id}
-                className="product-card"
-                onClick={() => onSelectProduct && onSelectProduct(p._id)}
-              >
-                <div className="product-image">
-                  <img src={p.imagen} alt={p.nombre} className="product-img" />
-                  {p.certificacion && <div className="sustainability-badge">{p.certificacion}</div>}
+            {loading && <p>Cargando productos...</p>}
+            {error && <p>Error: {error}</p>}
+            {!loading &&
+              !error &&
+              productosRelacionados.map((prod) => (
+                <div
+                  key={prod.id}
+                  className="product-card"
+                  onClick={() => onSelectProduct(prod.id)}
+                >
+                  <div className="product-image">
+                    <img
+                      src={prod.imagen || prod.imagenUrl}
+                      alt={prod.nombre}
+                      className="product-img"
+                    />
+                    {prod.certificacion && (
+                      <div className="sustainability-badge">{prod.certificacion}</div>
+                    )}
+                  </div>
+                  <div className="product-info">
+                    <h3 className="product-title">{prod.nombre}</h3>
+                    <p className="product-description">
+                      {prod.descripcion?.substring(0, 80)}...
+                    </p>
+                    <div className="product-price">${prod.precio}</div>
+                  </div>
                 </div>
-                <div className="product-info">
-                  <h4>{p.nombre}</h4>
-                  <p>{p.descripcion?.substring(0, 80)}...</p>
-                  <div className="product-price">${formatPrice(p.precio)}</div>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
-          <button onClick={onBack} className="btn btn-secondary volver-btn">
-            ← Volver al catálogo
-          </button>
+
+          <div className="section-header" style={{ marginTop: "2rem" }}>
+            <button onClick={onBack} className="btn btn-secondary">
+              Volver al catálogo
+            </button>
+          </div>
         </div>
       </section>
     </div>
