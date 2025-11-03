@@ -9,12 +9,22 @@ function Navbar({ cartCount, onNavigate, onCartClick }) {
   <h1 className="logo">HERMANOS JOTA</h1>
 </button>
 
+
+
         <ul className="nav-menu">
           <li>
             <button onClick={() => onNavigate("home")} className="nav-link">
               Inicio
             </button>
           </li>
+
+          <li>
+   <button onClick={() => onNavigate("crud-demo")} className="nav-link">
+    DEMO CRUD
+  </button>
+</li>
+
+
 <li>
   <button
     onClick={() => onNavigate("nosotros")}

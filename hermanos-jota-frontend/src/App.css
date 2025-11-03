@@ -28,6 +28,7 @@ body {
 
 /* Header & Navigation */
 .header {
+
   background: var(--alabastro-calido);
   box-shadow: 0 2px 15px rgba(160, 82, 45, 0.1);
   position: fixed;
@@ -43,7 +44,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.7rem 2rem;
 }
 
 .logo {

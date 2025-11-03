@@ -4,9 +4,11 @@ import Footer from "./components/Footer";
 import ProductosCard from "./components/ProductCard";
 import DetalleProducto from "./components/ProductDetail";
 import ContactForm from "./components/ContactForm";
+import CRUDDemo from "./components/CRUDDemo.jsx";
 import CartPopup from "./components/CartPopup";
 import FavoritesPopup from "./components/FavoritesPopup";
 import Nosotros from "./components/Nosotros";
+
 import "./App.css";
 
 function App() {
@@ -139,6 +141,11 @@ function App() {
     }
 
     if (currentView === "nosotros") return <Nosotros handleNavigate={handleNavigate} />;
+
+      // ✅ NUEVA VISTA CRUD
+  if (currentView === "crud-demo") {
+    return <CRUDDemo productos={productos} setProductos={setProductos} />;
+  }
 
     // --- HOME ---
     return (
