@@ -1,0 +1,31 @@
+Para probar el Backend:
+
+Dentro de la carpeta Backend crear archivo ".env" siguiendo el ejemplo de ".env.example" y completar los campos con los datos requeridos.
+
+En la terminal de /Backend:
+
+npm run seed
+
+npm run dev
+
+Probar endpoints:
+
+   # Obtener todos los productos
+   curl http://localhost:3001/api/productos
+
+   # Obtener producto específico
+   curl http://localhost:3001/api/productos/1
+
+   # Obtener productos por categoría
+   curl "http://localhost:3001/api/productos?categoria=sillas"
+
+   # Probar ruta no encontrada
+   curl http://localhost:3001/api/categorias
+
+Para probar el Front:
+
+En la terminal de /hermanos-jota-frontend
+
+npm install (una vez para instalar el node_modules)
+
+npm start
