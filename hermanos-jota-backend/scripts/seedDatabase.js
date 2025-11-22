@@ -20,7 +20,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 5,
-    imagenUrl: "aparador-uspallata.jpg"
+    imagenUrl: "https://i.postimg.cc/ZRVSZNLk/Aparador-Uspallata.png"
   },
   {
     nombre: "Biblioteca Recoleta",
@@ -38,7 +38,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 8,
-    imagenUrl: "biblioteca-recoleta.jpg"
+    imagenUrl: "https://i.postimg.cc/MHpjKy25/Biblioteca-Recoleta.png"
   },
   {
     nombre: "Butaca Mendoza",
@@ -56,7 +56,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 12,
-    imagenUrl: "butaca-mendoza.jpg"
+    imagenUrl: "https://i.postimg.cc/6qpG5dJ0/Butaca-Mendoza.png"
   },
   {
     nombre: "Sillón Copacabana",
@@ -74,7 +74,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 3,
-    imagenUrl: "sillon-copacabana.jpg"
+    imagenUrl: "https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png"
   },
   {
     nombre: "Mesa de Centro Araucaria",
@@ -92,7 +92,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 6,
-    imagenUrl: "mesa-centro-araucaria.jpg"
+    imagenUrl: "https://i.postimg.cc/HntD3yVZ/Mesa-de-Centro-Araucaria.png"
   },
   {
     nombre: "Mesa de Noche Aconcagua",
@@ -110,7 +110,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 15,
-    imagenUrl: "mesa-noche-aconcagua.jpg"
+    imagenUrl: "https://i.postimg.cc/MHY2tQn2/Mesa-de-Noche-Aconcagua.png"
   },
   {
     nombre: "Cama Neuquén",
@@ -128,7 +128,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 4,
-    imagenUrl: "cama-neuquen.jpg"
+    imagenUrl: "https://i.postimg.cc/prBr8yxx/descarga.png"
   },
   {
     nombre: "Sofá Patagonia",
@@ -146,7 +146,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 2,
-    imagenUrl: "sofa-patagonia.jpg"
+    imagenUrl: "https://i.postimg.cc/9FWj0JnP/Sof-Patagonia.png"
   },
   {
     nombre: "Mesa Comedor Pampa",
@@ -164,7 +164,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 7,
-    imagenUrl: "mesa-comedor-pampa.jpg"
+    imagenUrl: "https://i.postimg.cc/1XKhMq8x/Mesa-Comedor-Pampa.png"
   },
   {
     nombre: "Sillas Córdoba (Set x4)",
@@ -182,7 +182,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 10,
-    imagenUrl: "sillas-cordoba.jpg"
+    imagenUrl: "https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png"
   },
   {
     nombre: "Escritorio Costa",
@@ -200,7 +200,7 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 9,
-    imagenUrl: "escritorio-costa.jpg"
+    imagenUrl: "https://i.postimg.cc/ZKThnVMF/Escritorio-Costa.png"
   },
   {
     nombre: "Silla de Trabajo Belgrano",
@@ -218,9 +218,10 @@ const productosIniciales = [
     },
     enStock: true,
     stock: 20,
-    imagenUrl: "silla-trabajo-belgrano.jpg"
+    imagenUrl: "https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png"
   }
 ];
+
 
 const seedDatabase = async () => {
   try {
@@ -228,21 +229,23 @@ const seedDatabase = async () => {
 
     // Limpiar la colección
     await Product.deleteMany({});
-    console.log('🗑️  Base de datos limpiada');
+    console.log('  Base de datos limpiada');
 
-    // Insertar productos
-    const productosCreados = await Product.insertMany(productosIniciales);
-    console.log(`✅ ${productosCreados.length} productos insertados exitosamente`);
+    // Insertar productos y asignar id numérico
+    const productosCreados = await Product.insertMany(
+      productosIniciales.map((p, i) => ({ ...p, id: i + 1 }))
+    );
 
+    console.log(` ${productosCreados.length} productos insertados exitosamente`);
     console.log('========================================');
     productosCreados.forEach(p => {
-      console.log(`- ${p.nombre} (${p.categoria}) - $${p.precio.toLocaleString()}`);
+      console.log(`- ${p.nombre} (${p.categoria}) - $${p.precio.toLocaleString()} - id: ${p.id}`);
     });
     console.log('========================================');
 
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error al poblar la base de datos:', error);
+    console.error(' Error al poblar la base de datos:', error);
     process.exit(1);
   }
 };

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../../hermanos-jota-backend/models/User');
 
 // Verificar JWT y autenticar usuario
 const protegerRuta = async (req, res, next) => {

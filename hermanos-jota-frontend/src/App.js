@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+// COMPONENTES
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProductosCard from "./components/ProductCard";
@@ -8,6 +10,8 @@ import CRUDDemo from "./components/CRUDDemo.jsx";
 import CartPopup from "./components/CartPopup";
 import FavoritesPopup from "./components/FavoritesPopup";
 import Nosotros from "./components/Nosotros";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 import "./App.css";
 
@@ -26,7 +30,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
-  // --- Fetch productos desde el backend ---
+  // Fetch productos
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -52,19 +56,18 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
- const handleSelectProduct = (id) => {
-  const productoFull = productos.find(
-    (p) => p.id === id || p._id === id || p.idProducto === id
-  );
-  if (productoFull) {
-    setSelectedProduct(productoFull);
-    setCurrentView("detalle");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    console.error("Producto no encontrado:", id, productos);
-  }
-};
-
+  const handleSelectProduct = (id) => {
+    const productoFull = productos.find(
+      (p) => p.id === id || p._id === id || p.idProducto === id
+    );
+    if (productoFull) {
+      setSelectedProduct(productoFull);
+      setCurrentView("detalle");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      console.error("Producto no encontrado:", id, productos);
+    }
+  };
 
   const handleBackToCatalog = () => {
     setSelectedProduct(null);
@@ -72,7 +75,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // --- Carrito ---
+  // Carrito
   const handleAddToCart = (producto) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === producto.id);
@@ -100,7 +103,7 @@ function App() {
   const toggleCart = () => setIsCartOpen((prev) => !prev);
   const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
 
-  // --- Favoritos ---
+  // Favoritos
   const handleToggleFavorite = (producto) => {
     setFavorites((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
@@ -112,7 +115,7 @@ function App() {
   const handleRemoveFavorite = (id) =>
     setFavorites((prev) => prev.filter((item) => item.id !== id));
 
-  // --- Renderizar según vista ---
+  // Render según vista
   const renderContent = () => {
     if (currentView === "detalle" && selectedProduct) {
       return (
@@ -123,9 +126,13 @@ function App() {
           onSelectProduct={handleSelectProduct}
           onToggleFavorite={handleToggleFavorite}
           favorites={favorites}
+          
         />
       );
     }
+
+    if (currentView === "login") return <Login />;
+if (currentView === "registro") return <Register />;
 
     if (currentView === "contacto") return <ContactForm />;
 
@@ -142,12 +149,11 @@ function App() {
 
     if (currentView === "nosotros") return <Nosotros handleNavigate={handleNavigate} />;
 
-      // ✅ NUEVA VISTA CRUD
-  if (currentView === "crud-demo") {
-    return <CRUDDemo productos={productos} setProductos={setProductos} />;
-  }
+    if (currentView === "crud-demo") {
+      return <CRUDDemo productos={productos} setProductos={setProductos} />;
+    }
 
-    // --- HOME ---
+    // HOME
     return (
       <>
         <section className="hero">
@@ -159,22 +165,40 @@ function App() {
                 Cada pieza cuenta la historia de manos expertas y materiales nobles.
               </p>
               <div className="cta-buttons">
-                <button onClick={() => handleNavigate("productos")} className="btn btn-primary">
+                <button
+                  onClick={() => handleNavigate("productos")}
+                  className="btn btn-primary"
+                >
                   Ver Colección
                 </button>
-                <button onClick={() => handleNavigate("contacto")} className="btn btn-secondary">
+                <button
+                  onClick={() => handleNavigate("contacto")}
+                  className="btn btn-secondary"
+                >
                   Contacto
                 </button>
               </div>
             </div>
-            <div className="banner"> <aside> <div id="carrusel-contenido">
-  <div id="carrusel-caja"> <div className="carrusel-elemento">
-    <img src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png" alt="Sillas Córdoba" />
-    </div> <div className="carrusel-elemento">
-      <img src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png" alt="Sillón Copacabana" />
-      </div> <div className="carrusel-elemento"> <img src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png" alt="Silla de Trabajo Belgrano" /> </div>
-      </div> </div> </aside> </div> </div> </section>
-         
+
+            <div className="banner">
+              <aside>
+                <div id="carrusel-contenido">
+                  <div id="carrusel-caja">
+                    <div className="carrusel-elemento">
+                      <img src="https://i.postimg.cc/3rjT3PnW/Sillas-C-rdoba.png" alt="Sillas Córdoba" />
+                    </div>
+                    <div className="carrusel-elemento">
+                      <img src="https://i.postimg.cc/zXJ1v0cF/Sill-n-Copacabana.png" alt="Sillón Copacabana" />
+                    </div>
+                    <div className="carrusel-elemento">
+                      <img src="https://i.postimg.cc/j2h0v7DY/Silla-de-Trabajo-Belgrano.png" alt="Silla Belgrano" />
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
 
         <section className="section section-alt">
           <div className="container">
@@ -217,7 +241,10 @@ function App() {
             </div>
 
             <div className="section-header" style={{ marginTop: "2rem" }}>
-              <button onClick={() => handleNavigate("productos")} className="btn btn-secondary">
+              <button
+                onClick={() => handleNavigate("productos")}
+                className="btn btn-secondary"
+              >
                 Ver Todos los Productos
               </button>
             </div>
