@@ -1,86 +1,80 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [usuario, setUsuario] = useState(
+    JSON.parse(localStorage.getItem("usuario")) || null
+  );
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const isAuthenticated = Boolean(token);
+
   // LOGIN
-  const login = async (email, password) => {
+  const login = async ({ email, password }) => {
     try {
-      const res = await axios.post("http://localhost:4000/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post("http://localhost:3001/api/auth/login", { email, password });
 
-      localStorage.setItem("token", res.data.token);
       setToken(res.data.token);
-      setUser(res.data.user);
-      setErrorMessage(null);
+      localStorage.setItem("token", res.data.token);
 
+      setUsuario(res.data.usuario);
+      localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
+
+      setErrorMessage(null);
       return true;
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || "Error al iniciar sesión");
+      setErrorMessage("Credenciales incorrectas");
       return false;
     }
   };
 
-  // REGISTER
-  const register = async (formData) => {
+  // REGISTRO
+  const register = async (form) => {
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/auth/register",
-        formData
-      );
+      const res = await axios.post("http://localhost:3001/api/auth/registro", form);
+
+      setToken(res.data.token);
+      localStorage.setItem("token", res.data.token);
+
+      setUsuario(res.data.usuario);
+      localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
+
       setErrorMessage(null);
       return true;
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || "Error en el registro");
+      setErrorMessage("Error al registrarse");
       return false;
     }
   };
 
   // LOGOUT
   const logout = () => {
-    localStorage.removeItem("token");
+    setUsuario(null);
     setToken(null);
-    setUser(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
   };
 
-  // CHECK TOKEN AL REFRESCAR
-  const checkToken = async () => {
-    if (!token) return;
-
-    try {
-      const res = await axios.get(
-        "http://localhost:4000/api/auth/profile",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      setUser(res.data.user);
-    } catch (err) {
-      logout();
-    }
+  // ACTUALIZAR PERFIL LOCALMENTE
+  const updateUsuario = (updatedData) => {
+    const nuevoUsuario = { ...usuario, ...updatedData };
+    setUsuario(nuevoUsuario);
+    localStorage.setItem("usuario", JSON.stringify(nuevoUsuario));
   };
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        usuario,
         token,
+        isAuthenticated,
         login,
-        register,
         logout,
+        register,
+        updateUsuario,
         errorMessage,
       }}
     >
@@ -89,5 +83,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// ⚡ ESTA ES LA PARTE QUE TE FALTABA ⚡
+// Hook para usar AuthContext fácilmente
 export const useAuth = () => useContext(AuthContext);

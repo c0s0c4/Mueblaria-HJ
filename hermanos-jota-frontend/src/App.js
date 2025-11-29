@@ -3,34 +3,45 @@ import React, { useState, useEffect } from "react";
 // COMPONENTES
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import ProductosCard from "./components/ProductCard";
-import DetalleProducto from "./components/ProductDetail";
-import ContactForm from "./components/ContactForm";
+import ProductosCard from "./pages/ProductCard.jsx";
+import DetalleProducto from "./pages/ProductDetail.jsx";
+import ContactForm from "./pages/ContactForm.jsx";
 import CRUDDemo from "./components/CRUDDemo.jsx";
 import CartPopup from "./components/CartPopup";
 import FavoritesPopup from "./components/FavoritesPopup";
-import Nosotros from "./components/Nosotros";
+import Nosotros from "./pages/Nosotros.jsx";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import CartButton from './components/Cartbuttom.jsx'; 
+import Checkout from "./pages/Checkout.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx"; 
+
+
+// CONTEXTOS
+import { useCart } from "./context/CartContext.jsx";
 
 import "./App.css";
 
 function App() {
+  // ---------- DATA ----------
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // ---------- NAVEGACIÓN ----------
   const [currentView, setCurrentView] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Carrito
-  const [cart, setCart] = useState([]);
+  // ---------- CART (de contexto) ----------
+  const { cart } = useCart();
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Favoritos
+  // ---------- FAVORITOS ----------
   const [favorites, setFavorites] = useState([]);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
-  // Fetch productos
+  // ---------- FETCH PRODUCTOS ----------
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -49,12 +60,17 @@ function App() {
     fetchProductos();
   }, []);
 
-  // Navegación
+  // ---------- NAVEGACIÓN ----------
   const handleNavigate = (view) => {
     setCurrentView(view);
     setSelectedProduct(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const handleMenuItemClick = (route, action) => {
+  if (action) action();
+  if (route) handleNavigate(route);
+};
+
 
   const handleSelectProduct = (id) => {
     const productoFull = productos.find(
@@ -64,8 +80,6 @@ function App() {
       setSelectedProduct(productoFull);
       setCurrentView("detalle");
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      console.error("Producto no encontrado:", id, productos);
     }
   };
 
@@ -75,35 +89,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Carrito
-  const handleAddToCart = (producto) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === producto.id);
-      if (existingItem) {
-        return prevCart.map((item) =>
-          item.id === producto.id
-            ? { ...item, cantidad: item.cantidad + (producto.cantidad || 1) }
-            : item
-        );
-      }
-      return [...prevCart, { ...producto, cantidad: producto.cantidad || 1 }];
-    });
-  };
-
-  const handleRemoveFromCart = (id) =>
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-
-  const handleQuantityChange = (id, newCantidad) =>
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, cantidad: Math.max(newCantidad, 1) } : item
-      )
-    );
-
-  const toggleCart = () => setIsCartOpen((prev) => !prev);
-  const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
-
-  // Favoritos
+  // ---------- FAVORITOS ----------
   const handleToggleFavorite = (producto) => {
     setFavorites((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
@@ -112,29 +98,32 @@ function App() {
     });
   };
 
+
+
   const handleRemoveFavorite = (id) =>
     setFavorites((prev) => prev.filter((item) => item.id !== id));
 
-  // Render según vista
+  // ---------- RENDER SEGÚN VISTA ----------
   const renderContent = () => {
     if (currentView === "detalle" && selectedProduct) {
       return (
         <DetalleProducto
           producto={selectedProduct}
           onBack={handleBackToCatalog}
-          onAddToCart={handleAddToCart}
           onSelectProduct={handleSelectProduct}
           onToggleFavorite={handleToggleFavorite}
           favorites={favorites}
-          
         />
       );
     }
 
-    if (currentView === "login") return <Login />;
-if (currentView === "registro") return <Register />;
-
+    if (currentView === "login") return <Login handleNavigate={handleNavigate} />;
+    if (currentView === "registro") return <Register handleNavigate={handleNavigate} />;
     if (currentView === "contacto") return <ContactForm />;
+
+    if (currentView === "checkout") {
+      return <Checkout />;
+    }
 
     if (currentView === "productos") {
       return (
@@ -147,13 +136,17 @@ if (currentView === "registro") return <Register />;
       );
     }
 
-    if (currentView === "nosotros") return <Nosotros handleNavigate={handleNavigate} />;
+    if (currentView === "nosotros")
+      return <Nosotros handleNavigate={handleNavigate} />;
 
-    if (currentView === "crud-demo") {
+    if (currentView === "crud-demo")
       return <CRUDDemo productos={productos} setProductos={setProductos} />;
-    }
+    if (currentView === "direcciones") {
+  return <ProfilePage />;
+}
 
-    // HOME
+
+    // ---------- HOME ----------
     return (
       <>
         <section className="hero">
@@ -223,7 +216,6 @@ if (currentView === "registro") return <Register />;
                         src={producto.imagenUrl}
                         alt={producto.nombre}
                         className="product-img"
-                        style={{ maxWidth: "100%", height: "auto" }}
                       />
                       {producto.certificacion && (
                         <div className="sustainability-badge">{producto.certificacion}</div>
@@ -254,6 +246,7 @@ if (currentView === "registro") return <Register />;
     );
   };
 
+  // ---------- LAYOUT PRINCIPAL ----------
   return (
     <div className="App">
       <Navbar
@@ -264,15 +257,18 @@ if (currentView === "registro") return <Register />;
         onFavoritesClick={() => setIsFavoritesOpen(true)}
       />
 
+      <CartButton onClick={() => setIsCartOpen(true)} itemCount={cartCount} />
+
       <main>{renderContent()}</main>
 
+    
+
       <CartPopup
-        isOpen={isCartOpen}
-        cart={cart}
-        onClose={toggleCart}
-        onRemove={handleRemoveFromCart}
-        onQuantityChange={handleQuantityChange}
-      />
+  isOpen={isCartOpen}
+  onClose={() => setIsCartOpen(false)}
+  handleMenuItemClick={handleMenuItemClick}
+/>
+
 
       <FavoritesPopup
         isOpen={isFavoritesOpen}

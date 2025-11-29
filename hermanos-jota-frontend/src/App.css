@@ -982,3 +982,350 @@ body {
     transform: scale(1);
   }
 }
+
+/*log in / register
+
+/* From Uiverse.io by gharsh11032000 */ 
+.animated-button {
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 26px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 14px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: var(--siena-tostado);
+  box-shadow: 0 0 0 2px var(--siena-tostado);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 20px;
+  fill: var(--siena-tostado);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 16px;
+}
+
+.animated-button .arr-2 {
+  left: -25%;
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: var(--siena-tostado);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button:hover svg {
+  fill: #ffffff;
+}
+
+.animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px  var(--siena-tostado);
+}
+
+.animated-button:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}
+
+
+.animated-button2 {
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 26px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 14px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: var(--verde-salvia);
+  box-shadow: 0 0 0 2px  var(--verde-salvia);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button2 svg {
+  position: absolute;
+  width: 20px;
+  fill: var(--verde-salvia);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button2 .arr-1 {
+  right: 16px;
+}
+
+.animated-button2 .arr-2 {
+  left: -25%;
+}
+
+.animated-button2 .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button2 .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button2:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: var(--verde-salvia);
+  border-radius: 12px;
+}
+
+.animated-button2:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button2:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button2:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button2:hover svg {
+  fill: var(--verde-salvia);
+}
+
+.animated-button2:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px  white;
+}
+
+.animated-button2:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}
+
+
+/* Contenedor principal del menú desplegable */
+.profile-dropdown-container {
+    position: relative; /* Es crucial para que el menú se posicione correctamente */
+    display: flex;
+    align-items: center;
+    list-style: none; /* Asegura que no haya viñetas si está dentro de un <ul> */
+    margin-left: 15px; /* Espacio con el carrito o el elemento anterior */
+}
+
+/* Estilo del botón de perfil/usuario (Hola, Oscar) */
+.profile-button {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Fondo del botón (puede ser transparente) */
+    color: #333; /* Color del texto */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50px; /* Borde redondeado, opcional */
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 600;
+}
+
+.profile-button:hover {
+    background-color: #fcdcb2;
+}
+
+/* Placeholder para la imagen de avatar (el círculo azul) */
+.avatar-placeholder {
+    width: 30px;
+    height: 30px;
+    background-color: var(--verde-salvia); /* Azul del ejemplo */
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.user-name {
+    margin-right: 5px;
+}
+
+.arrow-icon {
+    font-size: 10px; /* Flecha pequeña */
+}
+
+/* Estilo del menú flotante */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Coloca el menú justo debajo del botón */
+    right: 0; /* Alinea el menú a la derecha del botón */
+    z-index: 1000;
+    min-width: 200px; /* Ancho mínimo para contener el texto */
+    background-color: #fffbf5; /* Fondo blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-top: 10px; /* Espacio entre el botón y el menú */
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Triángulo superior (el 'pico' que apunta al botón) */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px; /* Altura del triángulo */
+    right: 15px; /* Posición del triángulo */
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff1df; /* Color del borde para que coincida con el fondo del menú */
+    z-index: 1001;
+}
+
+/* Estilo para cada elemento del menú */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #402a00;
+    font-size: 14px;
+    transition: background-color 0.15s, color 0.15s;
+    white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+/* Estado al pasar el ratón */
+.dropdown-item:hover {
+    background-color: #fcdcb2; /* Fondo gris claro al pasar el ratón */
+}
+
+/* Estilo especial para el elemento activo (Escritorio en el ejemplo) */
+.dropdown-item.active {
+    background-color: #ffffff; /* Color de fondo */
+    color: #402a00;
+    font-weight: 600;
+}
+
+/* Estilo para el ícono/emoji de cada elemento (ajusta si usas react-icons o SVGs) */
+.dropdown-item::before {
+    /* Aquí puedes manejar los íconos si usas sprites o librerías */
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Separador visual si es necesario (ej: antes de cerrar sesión) */
+.dropdown-item.logout {
+    border-top: 1px solid #dccdb9;
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
+/* Estilo del botón de carrito, para que quede al lado del menú desplegable */
+.cart-button {
+    /* ... (asegúrate de que tenga el mismo padding y alineación que otros elementos del nav-menu) */
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px; /* Ajusta según tu nav-menu */
+    margin-left: 10px;
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff4d4f; /* Rojo de notificación */
+    color: #fff7ed;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+    line-height: 1;
+}
+
+
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-weight: bold;
+  color: #fff;
+  font-size: 18px;
+}
+
+.avatar-placeholder img.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

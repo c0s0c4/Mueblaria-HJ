@@ -1,8 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar({ cartCount, onNavigate, onCartClick }) {
-  const { user, isAuthenticated, logout } = useContext(AuthContext);
+  const { usuario, logout, isAuthenticated } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleMenuItemClick = (route, action) => {
+    if (action) action();
+    if (route) onNavigate(route);
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="header">
@@ -59,49 +70,98 @@ function Navbar({ cartCount, onNavigate, onCartClick }) {
             </div>
           </label>
 
-          {/* 🛒 CARRITO */}
-          <li>
-            <div className="cart-icon" onClick={onCartClick}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 640 640"
-                width="30"
-                height="30"
-                fill="currentColor"
-              >
-                <path d="M0 72C0 58.7 10.7 48 24 48L69.3 48C96.4 48 119.6 67.4 124.4 94L124.8 96L537.5 96C557.5 96 572.6 114.2 568.9 133.9L537.8 299.8C532.1 330.1 505.7 352 474.9 352L171.3 352L176.4 380.3C178.5 391.7 188.4 400 200 400L456 400C469.3 400 480 410.7 480 424C480 437.3 469.3 448 456 448L200.1 448C165.3 448 135.5 423.1 129.3 388.9L77.2 102.6C76.5 98.8 73.2 96 69.3 96L24 96C10.7 96 0 85.3 0 72zM160 528C160 501.5 181.5 480 208 480C234.5 480 256 501.5 256 528C256 554.5 234.5 576 208 576C181.5 576 160 554.5 160 528zM384 528C384 501.5 405.5 480 432 480C458.5 480 480 501.5 480 528C480 554.5 458.5 576 432 576C405.5 576 384 554.5 384 528z" />
-              </svg>
-
-              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-            </div>
-          </li>
-
-          {/* 🔐 LOGIN / REGISTRO / LOGOUT */}
+          {/* 🔐 LOGIN / REGISTRO */}
           {!isAuthenticated && (
             <>
               <li>
-                <button onClick={() => onNavigate("login")} className="nav-link">
-                  Login
+                <button onClick={() => onNavigate("login")} className="animated-button">
+                  <svg viewBox="0 0 24 24" className="arr-2">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                  </svg>
+                  <span className="text">Log in</span>
+                  <span className="circle"></span>
+                  <svg viewBox="0 0 24 24" className="arr-1">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                  </svg>
                 </button>
               </li>
+
               <li>
-                <button onClick={() => onNavigate("registro")} className="nav-link">
-                  Registro
+                <button onClick={() => onNavigate("registro")} className="animated-button2">
+                  <svg viewBox="0 0 24 24" className="arr-2">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                  </svg>
+                  <span className="text">Sign up</span>
+                  <span className="circle"></span>
+                  <svg viewBox="0 0 24 24" className="arr-1">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                  </svg>
                 </button>
               </li>
             </>
           )}
 
+          {/* 👤 LOGGED IN CON MENÚ DESPLEGABLE */}
           {isAuthenticated && (
-            <>
-              <li className="nav-link">Hola, {user?.nombre || "Usuario"}</li>
-              <li>
-                <button onClick={logout} className="nav-link">
-                  Cerrar sesión
-                </button>
-              </li>
-            </>
+            <li className="profile-dropdown-container">
+              {/* Botón que activa el menú. Se añade la imagen de perfil/avatar. */}
+                     <button onClick={toggleMenu} className="profile-button">
+                <div className="avatar-placeholder">
+  {usuario?.foto ? (
+    <img src={usuario.foto} alt="Avatar" className="avatar-img" />
+  ) : (
+    usuario?.nombre?.charAt(0).toUpperCase() || "V"
+  )}
+</div>
+
+                <span className="user-name">Hola, {usuario?.nombre || "Usuario"}</span>
+                <span className="arrow-icon">▼</span>
+              </button>
+
+              {/* Menú Desplegable */}
+              {isMenuOpen && (
+                <div className="dropdown-menu">
+                 
+                  
+                <button 
+  className="dropdown-item" 
+onClick={() => handleMenuItemClick("checkout")}
+>
+  Mi Carrito
+</button>
+
+
+<button 
+  className="dropdown-item" 
+  onClick={() => handleMenuItemClick("direcciones")}
+>
+  Perfil
+</button>
+
+                  <button 
+                    className="dropdown-item" 
+                    onClick={() => handleMenuItemClick("metodos-pago")}
+                  >
+                  Métodos de pago
+                  </button>
+<button
+  className="dropdown-item logout"
+  onClick={() => {
+    logout();          // Cierra sesión
+    onNavigate("home"); // Redirige al inicio
+    setIsMenuOpen(false); // Cierra el menú desplegable
+  }}
+>
+  Cerrar sesión
+</button>
+
+                </div>
+              )}
+            </li>
           )}
+           {/* Botón de carrito - Mantenido al final de la navegación principal */}
+           <li>
+          </li>
         </ul>
       </nav>
     </header>

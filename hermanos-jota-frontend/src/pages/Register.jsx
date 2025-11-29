@@ -1,47 +1,80 @@
-import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const { register, errorMessage } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: "",
+    nombre: "",
     email: "",
-    password: "",
+    password: ""
   });
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const [mensaje, setMensaje] = useState("");
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await register(form);
 
-    if (success) navigate("/login");
+    try {
+      const res = await fetch("http://localhost:3001/api/auth/registro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setMensaje(data.mensaje || "Error en el registro");
+        return;
+      }
+
+      // OPCIONAL: Guardar el token si tu backend lo devuelve en /register
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      setMensaje("Registro exitoso, ya puedes iniciar sesión");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500); // tiempo para visualizar mensaje
+
+    } catch (error) {
+      setMensaje("Error conectando al servidor");
+    }
   };
 
   return (
     <div className="auth-container">
-      <h2>Crear Cuenta</h2>
+      <h2>Crear cuenta</h2>
 
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      {mensaje && <p className="error">{mensaje}</p>}
 
       <form onSubmit={handleSubmit}>
         <input
-          name="name"
-          placeholder="Nombre"
-          value={form.name}
+          type="text"
+          name="nombre"
+          placeholder="Nombre completo"
+          value={form.nombre}
           onChange={handleChange}
+          required
         />
 
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Correo electrónico"
           value={form.email}
           onChange={handleChange}
+          required
         />
 
         <input
@@ -50,10 +83,31 @@ export default function Register() {
           placeholder="Contraseña"
           value={form.password}
           onChange={handleChange}
+          required
         />
 
-        <button type="submit">Registrarme</button>
+             <input
+          type="password"
+          name="repeatPassword"
+          placeholder="Repite la contraseña"
+          value={form.repeatPassword}
+          onChange={handleChange}
+        />
+
+
+        <button type="submit" className="btn-primary">
+          Registrarme
+        </button>
       </form>
+
+      <button
+        className="btn-outline"
+        style={{ marginTop: "10px" }}
+      onClick={() => navigate("/login")}
+
+      >
+        Ya tengo cuenta
+      </button>
     </div>
   );
 }
