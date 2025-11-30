@@ -112,6 +112,9 @@ npm install
 
 ## Estructura de Archivos del Proyecto
 
+
+```plaintext
+
 Mueblaria-HJ-main/
 │
 ├── hermanos-jota-backend/              # API REST con Node.js + Express + MongoDB
@@ -195,10 +198,10 @@ Mueblaria-HJ-main/
     ├── .gitignore
     ├── package.json
     └── README.md
-
+```
 ## Modo de Uso y Ejecución
 Una vez que el backend (http://localhost:3001) y el frontend (http://localhost:3000) estén corriendo (usando npm run dev en cada carpeta, como se explicó en la instalación), la aplicación está lista para usarse.
 
 ## Deploy
-Backend – Render : 
-Frontend – Vercel :
+# Backend – Render : 
+# Frontend – Vercel :
