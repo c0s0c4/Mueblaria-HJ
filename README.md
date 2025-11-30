@@ -1,10 +1,10 @@
 
-## Hermanos Jota – Plataforma E-commerce de Muebles
+# Hermanos Jota – Plataforma E-commerce de Muebles
 Proyecto académico – Curso Full Stack ITBA
 
 ---
 
-##  Resumen del proyecto
+#  Resumen del proyecto
 <br>
 
 Aplicación **Full-Stack** diseñada para gestionar catálogo de productos, usuarios, favoritos, carrito de compras y órdenes en una tienda de muebles. El sistema incluye un frontend en **React + Vite** y un backend en **Node.js, Express y MongoDB Atlas**, con autenticación segura mediante **JSON Web Tokens (JWT)**.
@@ -40,7 +40,7 @@ Aplicación **Full-Stack** diseñada para gestionar catálogo de productos, usua
 
 ---
 
-## Tecnologías Utilizadas
+# Tecnologías Utilizadas
 
 ### **Frontend** (Carpeta `hermanos-jota-frontend`)
 
@@ -63,7 +63,7 @@ Aplicación **Full-Stack** diseñada para gestionar catálogo de productos, usua
 
 ---
 
-## Instalación y Configuración
+# Instalación y Configuración
 
 ### Requisitos Previos
 
@@ -74,7 +74,7 @@ Asegúrate de tener instalado:
 * Una cuenta y URI de conexión en **MongoDB Atlas** (para la base de datos).
 * Para probar el Backend: Dentro de la carpeta Backend crear archivo ".env" siguiendo el ejemplo de ".env.example" y completar los campos con los datos requeridos.
 
-## Configuración del Backend
+# Configuración del Backend
 Instalar dependencias:
 
 Bash
@@ -87,19 +87,19 @@ npm run dev
 
 Probar endpoints:
 
-   # Obtener todos los productos
+   ## Obtener todos los productos
    curl http://localhost:3001/api/productos
 
-   # Obtener producto específico
+   ## Obtener producto específico
    curl http://localhost:3001/api/productos/1
 
-   # Obtener productos por categoría
+   ## Obtener productos por categoría
    curl "http://localhost:3001/api/productos?categoria=sillas"
 
-   # Probar ruta no encontrada
+   ## Probar ruta no encontrada
    curl http://localhost:3001/api/categorias
 
-## Configuración del Frontend
+# Configuración del Frontend
 Instalar dependencias:
 
 Bash
@@ -110,7 +110,7 @@ npm install
 * Crear archivo de entorno: Crea un archivo llamado .env en la raíz de la carpeta hermanos-jota-frontend para apuntar a la API: Code snippet
 * VITE_API_URL=http://localhost:3001
 
-## Estructura de Archivos del Proyecto
+# Estructura de Archivos del Proyecto
 
 
 ```plaintext
@@ -199,9 +199,9 @@ Mueblaria-HJ-main/
     ├── package.json
     └── README.md
 ```
-## Modo de Uso y Ejecución
+# Modo de Uso y Ejecución
 Una vez que el backend (http://localhost:3001) y el frontend (http://localhost:3000) estén corriendo (usando npm run dev en cada carpeta, como se explicó en la instalación), la aplicación está lista para usarse.
 
-## Deploy
-# Backend – Render : 
-# Frontend – Vercel :
+# Deploy
+## Backend – Render : 
+## Frontend – Vercel :
