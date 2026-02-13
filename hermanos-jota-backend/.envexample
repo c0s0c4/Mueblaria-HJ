@@ -1,0 +1,4 @@
+MONGO_URI=mongodb+srv://tu_usuario:tu_clave@cluster0...
+JWT_SECRET=una_clave_secreta_muy_segura_para_jwt
+PORT=3001
+FRONTEND_URL=http://localhost:3000
